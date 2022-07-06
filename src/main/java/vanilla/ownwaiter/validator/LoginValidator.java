@@ -5,16 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import vanilla.ownwaiter.domain.user.SiteUser;
+import vanilla.ownwaiter.domain.user.User;
 import vanilla.ownwaiter.domain.login.LoginForm;
-import vanilla.ownwaiter.service.SiteUserService;
+import vanilla.ownwaiter.service.UserService;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class LoginValidator implements Validator {
 
-    private final SiteUserService siteUserService;
+    private final UserService userService;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -25,7 +25,7 @@ public class LoginValidator implements Validator {
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;
 
-        SiteUser loginSiteUser = siteUserService.findByEmail(loginForm.getEmail());
+        User loginSiteUser = userService.findByEmail(loginForm.getEmail());
         if(loginSiteUser == null) {
             errors.rejectValue("email", "notExist");
             return;

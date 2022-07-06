@@ -1,5 +1,7 @@
 package vanilla.ownwaiter.domain.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +14,10 @@ import java.util.Collection;
 @Slf4j
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
-@Table(name = "user")
-public class SiteUser implements UserDetails {
+@AllArgsConstructor
+public class User implements UserDetails {
 
     @Id @GeneratedValue
     @Column(name = "user_id")
@@ -24,10 +27,10 @@ public class SiteUser implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private SiteUserSex sex;
+    private UserSex sex;
 
     @Enumerated(EnumType.STRING)
-    private SiteUserRole role;
+    private UserRole role;
 
     @Transient
     private Collection<GrantedAuthority> authorities;
@@ -66,7 +69,7 @@ public class SiteUser implements UserDetails {
         return true;
     }
 
-    public SiteUser(String username, String email, String password, SiteUserSex sex, SiteUserRole role) {
+    public User(String username, String email, String password, UserSex sex, UserRole role) {
         this.username = username;
         this.email = email;
         this.password = password;

@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import vanilla.ownwaiter.domain.user.SiteUser;
-import vanilla.ownwaiter.domain.user.SiteUserRole;
+import vanilla.ownwaiter.domain.user.User;
+import vanilla.ownwaiter.domain.user.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,26 +19,26 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserSecurityService implements UserDetailsService {
 
-    private final SiteUserService siteUserService;
+    private final UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        SiteUser siteUser = getSiteUser(email);
+        User siteUser = getSiteUser(email);
         siteUser.setAuthorities(getGrantedAuthorities(siteUser));
         return siteUser;
     }
 
-    private SiteUser getSiteUser(String email) {
-        SiteUser findUser = siteUserService.findByEmail(email);
+    private User getSiteUser(String email) {
+        User findUser = userService.findByEmail(email);
         if (findUser == null) {
             throw new UsernameNotFoundException("존재 하지 않는 유저입니다.");
         }
         return findUser;
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(SiteUser user) {
+    private List<GrantedAuthority> getGrantedAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if (user.getRole().equals(SiteUserRole.ADMIN)) {
+        if (user.getRole().equals(UserRole.ADMIN)) {
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
         } else {
             authorities.add(new SimpleGrantedAuthority("USER"));

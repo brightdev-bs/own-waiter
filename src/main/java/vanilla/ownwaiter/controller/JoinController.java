@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vanilla.ownwaiter.constant.SessionConst;
 import vanilla.ownwaiter.domain.login.JoinForm;
-import vanilla.ownwaiter.domain.user.SiteUser;
-import vanilla.ownwaiter.domain.user.SiteUserRole;
-import vanilla.ownwaiter.domain.user.SiteUserSex;
-import vanilla.ownwaiter.service.SiteUserService;
+import vanilla.ownwaiter.domain.user.User;
+import vanilla.ownwaiter.domain.user.UserRole;
+import vanilla.ownwaiter.domain.user.UserSex;
+import vanilla.ownwaiter.service.UserService;
 import vanilla.ownwaiter.validator.JoinValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,15 +27,15 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class JoinController {
 
-    private final SiteUserService siteUserService;
+    private final UserService userService;
 
     private final JoinValidator joinValidator;
 
     @GetMapping
     public String loadJoinForm(Model model) {
         model.addAttribute(new JoinForm());
-        model.addAttribute("userSex", SiteUserSex.values());
-        model.addAttribute("userRole", SiteUserRole.values());
+        model.addAttribute("userSex", UserSex.values());
+        model.addAttribute("userRole", UserRole.values());
         return "login/joinForm";
     }
 
@@ -49,9 +49,9 @@ public class JoinController {
             return "login/joinForm";
         }
 
-        SiteUser joinSiteUser = new SiteUser(joinForm.getUsername(), joinForm.getEmail(), joinForm.getPwd(),
+        User joinSiteUser = new User(joinForm.getUsername(), joinForm.getEmail(), joinForm.getPwd(),
                 joinForm.getSiteUserSex(joinForm.getSex()), joinForm.getSiteUserRole(joinForm.getRole()));
-        siteUserService.save(joinSiteUser);
+        userService.save(joinSiteUser);
 
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.MEMBER_ID, joinSiteUser.getId());

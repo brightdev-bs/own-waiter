@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import vanilla.ownwaiter.domain.login.JoinForm;
-import vanilla.ownwaiter.service.SiteUserService;
+import vanilla.ownwaiter.service.UserService;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class JoinValidator implements Validator {
 
-    private final SiteUserService siteUserService;
+    private final UserService userService;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -24,7 +24,7 @@ public class JoinValidator implements Validator {
     public void validate(Object target, Errors errors) {
         JoinForm joinForm = (JoinForm) target;
 
-        if(siteUserService.findByEmail(joinForm.getEmail()) != null) {
+        if(userService.findByEmail(joinForm.getEmail()) != null) {
             errors.rejectValue("email", "exist");
             return;
         }
