@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <div th:replace="~{fragment/header :: header}"></div>
+        <style>
+            .field-error {
+                color: #dc3545;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <div th:replace="~{fragment/navbar :: nav}"></div>
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow rounded-3 my-5">
+                    <div class="card-body p-4 p-sm-5">
+                        <h5 class="card-title text-center mb-5 fw-light fs-5">로 그 인</h5>
+                        <form action="/home" th:action th:object="${loginForm}" method="post">
+                            <div class="form-floating mb-3">
+                                <label for="email">이메일</label>
+                                <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="name@example.com">
+                                <div class="field-error" th:errors="*{email}">이메일 오류</div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label for="floatingPassword">비밀번호</label>
+                                <input type="password" th:field="*{password}" class="form-control" id="floatingPassword" placeholder="Password">
+                                <div class="field-error" th:errors="*{password}">패스워드 오류</div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">로그인</button>
+                            </div>
+                            <hr class="my-4">
+                            <div class="d-grid mb-2">
+                                <button class="btn btn-google btn-login text-uppercase fw-bold" type="submit">
+                                    <i class="fab fa-google me-2"></i> 구글로 로그인
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-facebook btn-login text-uppercase fw-bold" type="submit">
+                                    <i class="fab fa-facebook-f me-2"></i> 페이스북 로그인
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

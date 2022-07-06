@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>own-waiter</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+    <div th:replace="~{fragment/navbar :: nav}"></div>
+
+<!-- Product section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <th:block th:each="food : ${restaurant.getItems}">
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0"
+                         th:align="middle"
+                         th:src="@{https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbbxzEL%2Fbtrzg3Kl3HF%2FI7HJ4Ttbkcdlu5avlQagw1%2Fimg.png}"
+                         th:alt="| 이름 : ${food.img.uploadFileName}| "/>
+                </div>
+                <div class="col-md-6">
+                    <div class="fs-4 mb-2" th:text="| 상품명 : ${food.name} |">상품 이름</div>
+                    <div class="fs-6 mb-1" th:text="${food.description}">상품 설명</div>
+                    <div class="fs-6 mb-1" th:text="| ${food.price} 원 |">물건 가격 </div>
+                    <div th:if="${siteUser != null}">
+                        <span th:text="${siteUser.username}">dd</span>
+                    </div>
+<!--                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">-->
+<!--                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{|/${siteUser.userId}/${restaurant.getId()}/${food.getId()}|}">장바구니</a></div>-->
+<!--                    </div>-->
+                </div>
+            </th:block>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+</body>
+</html>

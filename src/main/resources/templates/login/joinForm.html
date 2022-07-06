@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragment/header :: header}"></head>
+    <style>
+        .card-img-left {
+          width: 45%;
+          /* Link to your background image using in the property below! */
+          background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+          background-size: cover;
+        }
+
+        .btn-login {
+          font-size: 0.9rem;
+          letter-spacing: 0.05rem;
+          padding: 0.75rem 1rem;
+        }
+
+        .btn-google {
+          color: white !important;
+          background-color: #ea4335;
+        }
+
+        .btn-facebook {
+          color: white !important;
+          background-color: #3b5998;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div th:replace="~{fragment/navbar :: nav}"></div>
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                        <div class="card-img-left d-none d-md-flex">
+                            <!-- Background image for card set in CSS! -->
+                        </div>
+                        <div class="card-body p-2 p-sm-3">
+
+                            <h5 class="card-title text-center mb-5 fw-light fs-5">회 원 가 입</h5>
+
+                            <form action="/main.html" th:action th:object="${joinForm}" method="post">
+                                <div class="form-floating mb-3">
+                                    <label for="username">사용자 이름</label>
+                                    <input type="text" id="username" th:field="*{username}" class="form-control">
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="email" id="email" class="form-control" th:field="*{email}" placeholder="name@example.com">
+                                    <label for="email">이메일 주소</label>
+<!--                                    <div class="field-error" th:errors="*{email}">이메일 오류</div>-->
+                                </div>
+
+                                <hr>
+
+                                <div class="form-floating mb-3">
+                                    <input type="password" id="pwd" class="form-control" th:field="*{pwd}" placeholder="Password">
+                                    <label for="pwd">패스워드</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="password" id="pwd2" class="form-control" th:field="*{pwd2}" placeholder="Confirm Password">
+                                    <label for="pwd2">패스워드 확인</label>
+<!--                                    <div class="field-error" th:errors="*{pwd2}">패스 워드 불일치</div>-->
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <div th:each="sex : ${userSex}" class="form-check form-check-inline">
+                                        <input type="radio" th:field="*{sex}" th:value="${sex.getSex()}" class="form-check-input">
+                                        <label th:text="${sex.getSex()}" class="form-check-label"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <div th:each="role : ${userRole}" class="form-check form-check-inline">
+                                        <input type="radio" th:field="*{role}" th:value="${role.getRole()}" class="form-check-input">
+                                        <label th:text="${role.getRole()}" class="form-check-label"></label>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid mb-2">
+                                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">회원가입</button>
+                                </div>
+
+                                <a class="d-block text-center mt-2 small" th:href="@{/signIn}">회원이신가요? 로그인하기</a>
+
+                                <hr class="my-4">
+
+                                <div class="d-grid mb-2">
+                                    <button class="btn btn-lg btn-google btn-login fw-bold text-uppercase" type="submit">
+                                        <i class="fab fa-google me-2"></i> 구글 회원가입
+                                    </button>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button class="btn btn-lg btn-facebook btn-login fw-bold text-uppercase" type="submit">
+                                        <i class="fab fa-facebook-f me-2"></i> 페이스북 회원가입
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

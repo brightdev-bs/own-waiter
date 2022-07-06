@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <body>
+        <div th:fragment="nav">
+            <!--         Navigation        -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container px-4 px-lg-5">
+                    <a class="navbar-brand" th:href="main" href="#!">너만의 웨이터</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                    <th:block>
+                        <div sec:authorize="isAnonymous()" th:replace="~{/fragment/beforeLoginNav}">로그인 전</div>
+                        <div sec:authorize="isAuthenticated()" th:replace="~{/fragment/afterLoginNav}">로그인 후</div>
+                    </th:block>
+                </div>
+            </nav>
+        </div>
+    </body>
+</html>
