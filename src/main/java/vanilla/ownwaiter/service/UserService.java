@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import vanilla.ownwaiter.domain.user.SiteUser;
+import vanilla.ownwaiter.domain.user.User;
 import vanilla.ownwaiter.repository.UserRepository;
 
 import java.util.Optional;
@@ -13,24 +13,24 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class SiteUserService {
+public class UserService {
 
     private final UserRepository userRepository;
 
-    public Long save(SiteUser siteUser) {
+    public User save(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        siteUser.setPassword(passwordEncoder.encode(siteUser.getPassword()));
-        userRepository.save(siteUser);
-        return siteUser.getId();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return user;
     }
-    public SiteUser findByEmail(String email) {
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
-        Optional<SiteUser> findUser = userRepository.findByEmail(email);
-
-        if(findUser.isEmpty()) {
-            return null;
-        }
-
-        return findUser.get();
+    public void deleteAll() {
+        userRepository.deleteAll();
     }
 }

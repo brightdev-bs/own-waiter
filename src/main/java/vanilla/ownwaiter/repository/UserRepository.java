@@ -1,43 +1,17 @@
 package vanilla.ownwaiter.repository;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import vanilla.ownwaiter.domain.user.SiteUser;
-
-import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.Optional;
+import vanilla.ownwaiter.domain.user.User;
 
 
-@Slf4j
 @Repository
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UserRepository {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    private final EntityManager em;
-
-    @Transactional
-    public Long save(SiteUser siteUser) {
-        em.persist(siteUser);
-        return siteUser.getId();
-    }
-
-    public SiteUser findById(Long id) {
-        return em.find(SiteUser.class, id);
-    }
-
-    public Optional<SiteUser> findByEmail(String email) {
-        return getAllUser().stream()
-                .filter(u -> u.getEmail().equals(email))
-                .findFirst();
-    }
-
-    public List<SiteUser> getAllUser() {
-        List<SiteUser> select_u_from_siteUser_u = em.createQuery("select u from SiteUser u").getResultList();
-        return select_u_from_siteUser_u;
-    }
-
+    @Query(value = "select u from User u where u.email =:email")
+    User findByEmail(@Param("email") String email);
 }
