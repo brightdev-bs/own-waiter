@@ -1,10 +1,10 @@
-package vanilla.ownwaiter.domain.login;
+package vanilla.ownwaiter.entity.dto;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import vanilla.ownwaiter.domain.user.UserRole;
-import vanilla.ownwaiter.domain.user.UserSex;
+import vanilla.ownwaiter.entity.user.UserRole;
+import vanilla.ownwaiter.entity.user.UserSex;
 
 @Slf4j
 @Data

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import vanilla.ownwaiter.domain.user.User;
+import vanilla.ownwaiter.entity.user.User;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

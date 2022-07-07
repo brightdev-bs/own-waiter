@@ -1,4 +1,4 @@
-package vanilla.ownwaiter.domain.login;
+package vanilla.ownwaiter.entity.dto;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
