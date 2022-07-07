@@ -1,4 +1,4 @@
-package vanilla.ownwaiter.domain.user;
+package vanilla.ownwaiter.entity.user;
 
 public enum UserSex {
 

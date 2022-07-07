@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import vanilla.ownwaiter.domain.user.User;
-import vanilla.ownwaiter.domain.user.UserRole;
+import vanilla.ownwaiter.entity.user.User;
+import vanilla.ownwaiter.entity.user.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;

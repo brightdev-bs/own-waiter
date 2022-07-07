@@ -1,4 +1,4 @@
-package vanilla.ownwaiter.domain.user;
+package vanilla.ownwaiter.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import vanilla.ownwaiter.entity.Basket;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Slf4j
 @Data
@@ -35,9 +37,8 @@ public class User implements UserDetails {
     @Transient
     private Collection<GrantedAuthority> authorities;
 
-    //Todo : froxy 배우고 다시 살릴 것.
-//    @OneToMany(cascade = CascadeType.ALL)
-//    List<Basket> basketList = new ArrayList<>();
+    @OneToOne
+    private Basket basket;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

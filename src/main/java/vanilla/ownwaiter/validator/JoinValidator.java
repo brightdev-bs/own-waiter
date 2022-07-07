@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import vanilla.ownwaiter.domain.login.JoinForm;
+import vanilla.ownwaiter.entity.dto.JoinForm;
 import vanilla.ownwaiter.service.UserService;
 
 @Slf4j

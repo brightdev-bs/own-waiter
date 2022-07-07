@@ -2,7 +2,7 @@ package vanilla.ownwaiter.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import vanilla.ownwaiter.domain.Item;
+import vanilla.ownwaiter.entity.Item;
 import vanilla.ownwaiter.repository.ItemRepository;
 
 @Service

@@ -2,7 +2,7 @@ package vanilla.ownwaiter.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import vanilla.ownwaiter.domain.Item;
+import vanilla.ownwaiter.entity.Item;
 
 import javax.persistence.EntityManager;
 

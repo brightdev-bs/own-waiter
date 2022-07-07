@@ -2,7 +2,7 @@ package vanilla.ownwaiter.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import vanilla.ownwaiter.domain.Restaurant;
+import vanilla.ownwaiter.entity.Restaurant;
 import vanilla.ownwaiter.repository.RestaurantRepository;
 import java.util.List;
 
