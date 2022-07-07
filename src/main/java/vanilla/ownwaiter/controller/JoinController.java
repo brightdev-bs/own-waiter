@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vanilla.ownwaiter.constant.SessionConst;
-import vanilla.ownwaiter.domain.login.JoinForm;
-import vanilla.ownwaiter.domain.user.User;
-import vanilla.ownwaiter.domain.user.UserRole;
-import vanilla.ownwaiter.domain.user.UserSex;
+import vanilla.ownwaiter.entity.dto.JoinForm;
+import vanilla.ownwaiter.entity.user.User;
+import vanilla.ownwaiter.entity.user.UserRole;
+import vanilla.ownwaiter.entity.user.UserSex;
 import vanilla.ownwaiter.service.UserService;
 import vanilla.ownwaiter.validator.JoinValidator;
 

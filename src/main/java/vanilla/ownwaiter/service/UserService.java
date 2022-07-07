@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import vanilla.ownwaiter.domain.user.User;
+import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.repository.UserRepository;
 
 import java.util.Optional;

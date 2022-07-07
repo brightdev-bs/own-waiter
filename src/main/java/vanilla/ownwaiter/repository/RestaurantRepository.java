@@ -3,7 +3,7 @@ package vanilla.ownwaiter.repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import vanilla.ownwaiter.domain.Restaurant;
+import vanilla.ownwaiter.entity.Restaurant;
 
 import javax.persistence.EntityManager;
 import java.util.List;

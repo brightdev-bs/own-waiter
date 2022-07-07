@@ -1,4 +1,4 @@
-package vanilla.ownwaiter.domain;
+package vanilla.ownwaiter.entity;
 
 import lombok.Data;
 

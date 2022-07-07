@@ -1,11 +1,13 @@
-package vanilla.ownwaiter.domain;
+package vanilla.ownwaiter.entity;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
 @Entity
 public class Restaurant {
 
@@ -18,14 +20,17 @@ public class Restaurant {
     private Img logo;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
     private List<Item> items;
 
     public Restaurant() {}
 
-    public Restaurant(String name, String location, Img logo) {
+    @Builder
+    public Restaurant(Long id, String name, String location, Img logo, List<Item> items) {
+        this.id = id;
         this.name = name;
         this.location = location;
         this.logo = logo;
+        this.items = items;
     }
-
 }
