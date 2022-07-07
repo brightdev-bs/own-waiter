@@ -14,7 +14,7 @@ public class Item {
     @Column(name = "item_id")
     private Long id;
     private String name;
-    private String price;
+    private int price;
 
     private String description;
     @Embedded
@@ -42,11 +42,13 @@ public class Item {
     }
 
     @Builder
-    public Item(Long id, String name, String price, String description, Img img) {
+    public Item(Long id, String name, int price, String description, Img img, Restaurant restaurant, Basket basket) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.img = img;
+        this.restaurant = restaurant;
+        this.basket = basket;
     }
 }
