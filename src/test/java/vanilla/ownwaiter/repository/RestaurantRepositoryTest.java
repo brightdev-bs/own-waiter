@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import vanilla.ownwaiter.entity.Restaurant;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -46,5 +47,12 @@ class RestaurantRepositoryTest {
         findRes.orElseThrow(() -> new NoSuchElementException("존재하지 않는 음식점입니다."));
 
         assertEquals(findRes.get().getName(), res.getName());
+    }
+
+    @Test
+    void likeByKeyword() {
+        List<Restaurant> findRes = restaurantRepository.likeByKeyword("김밥");
+        System.out.println(findRes.size());
+        assertEquals(findRes.size(), 1);
     }
 }

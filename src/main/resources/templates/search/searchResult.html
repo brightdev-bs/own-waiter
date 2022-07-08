@@ -12,7 +12,9 @@
         </form>
 
         <table class="table">
-
+            <tr th:each="res : ${restaurants}">
+                <td><span th:text="${res.name}"></span></td>
+            </tr>
         </table>
 
     </body>

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import vanilla.ownwaiter.entity.Restaurant;
 import vanilla.ownwaiter.repository.RestaurantRepository;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,6 +17,13 @@ import java.util.Optional;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+
+    @PostConstruct
+    void init() {
+        Restaurant res1 = Restaurant.builder().name("김밥천국1").location("도곡점").build();
+        Restaurant res2 = Restaurant.builder().name("김밥천국2").location("매봉점").build();
+        restaurantRepository.save(res1); restaurantRepository.save(res2);
+    }
 
     public Restaurant save(Restaurant restaurant) {
         // location이랑 이름을 합쳐서 저장하게 끔 하는게 좋을 것 같음.
@@ -33,6 +41,10 @@ public class RestaurantService {
         Optional<Restaurant> findRes = restaurantRepository.findByName(name);
         findRes.orElseThrow(() -> new NoSuchElementException("존재하지 않는 음식점입니다."));
         return findRes.get();
+    }
+
+    public List<Restaurant> likeByKeyword(String keyword) {
+        return restaurantRepository.likeByKeyword(keyword);
     }
 
     public List<Restaurant> findAll() {
