@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragment/header :: header}"></head>
+    <body class="container">
+        <div th:replace="~{fragment/navbar :: nav}"></div>
+
+        <form class="input-group mt-3 mb-3" th:action="@{/search/restaurant}" method="get">
+            <input type="text" class="form-control m-1" name="input" placeholder="레스토랑 이름">
+            <div class="input-group-append m-1">
+                <button class="btn btn-outline-secondary" type="submit">검색</button>
+            </div>
+        </form>
+
+        <form class="row" th:action="@{/search/recent/delete}">
+            <div class="col m-1 pt-1">
+                최근검색어
+            </div>
+            <div class="col m-1" style="text-align: right">
+                <button class="btn text-secondary" type="submit">전체 삭제</button>
+            </div>
+        </form>
+
+        <div class="row ps-3 pe-3 mb-3">
+            <span class="col-sm-3 badge rounded-pill bg-primary">Primary</span>
+            <span class="col-sm-3 badge rounded-pill bg-secondary">Secondary</span>
+            <span class="col-sm-3 badge rounded-pill bg-success">Success</span>
+            <span class="col-sm-3 badge rounded-pill bg-danger">Danger</span>
+        </div>
+
+
+        <h5>음식점</h5>
+        <div class="row row-cols-auto m-1 mb-3">
+            <div class="card me-2" style="width: 10rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title">Card title</h6>
+                </div>
+            </div>
+            <div class="card me-2" style="width: 10rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title">Card title</h6>
+                </div>
+            </div>
+            <div class="card me-2" style="width: 10rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title">Card title</h6>
+                </div>
+            </div>
+        </div>
+        </table>
+
+
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy;Byeongsu KIM</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
