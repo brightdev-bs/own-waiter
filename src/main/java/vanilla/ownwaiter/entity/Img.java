@@ -1,10 +1,11 @@
 package vanilla.ownwaiter.entity;
 
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.Embeddable;
 
-@Data
+@Getter
 @Embeddable
 public class Img {
 

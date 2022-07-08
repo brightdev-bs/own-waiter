@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
     <head th:insert="~{fragment/header :: header}"></head>
-    <body>
+    <body class="container">
         <div th:replace="~{fragment/navbar :: nav}"></div>
 
         <!-- Header-->
@@ -19,27 +19,24 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <tr th:each="res : ${restaurants}">
                         <div class="col mb-5">
-                            <div class="card h-100">
-                                <img class="card-img-top" th:src="@{images/} + ${res.logo.uploadFileName}" th:alt="${res.logo.uploadFileName}" />
-                                <!-- Product details-->
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Product name-->
-                                        <h5 class="fw-bolder" th:text="${res.name}">1번 상품</h5>
-                                    </div>
-                                </div>
-                                <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                                th:href="@{/res/{resId}(resId=${res.id})}"
-                                                                th:text="${res.name}"></a></div>
-                                </div>
+                            <div class="text-center" style="position: relative; top: 50%; transform: translateY(-50%)">
+                                <a class="p-4 btn btn-outline-dark mt-auto" href="/">QR검색</a>
+                            </div>
+                        </div>
+                        <div class="col mb-5">
+                            <div class="text-center" style="position: relative; top: 50%; transform: translateY(-50%)">
+                                <a class="p-4 btn btn-outline-dark mt-auto" href="/search">음식점 검색</a>
                             </div>
                         </div>
                     </tr>
                 </div>
             </div>
+            <div style="text-align: center">
+                <div>점주이신가요?</div>
+                <a th:href="@{/manager}">관리자 페이지 이동</a>
+            </div>
         </section>
+
 
         <!-- Footer-->
         <footer class="py-5 bg-dark">
