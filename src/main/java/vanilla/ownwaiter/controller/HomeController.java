@@ -15,7 +15,6 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/home")
 @RequiredArgsConstructor
 public class HomeController {
     private final RestaurantService restaurantService;
@@ -25,7 +24,12 @@ public class HomeController {
         return new Restaurant();
     }
 
-    @GetMapping
+    @GetMapping("/")
+    public String moveToHome() {
+        return "redirect:/home";
+    }
+
+    @GetMapping("/home")
     public String main(Model model) {
 
         initData(model);

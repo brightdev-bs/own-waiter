@@ -1,13 +1,12 @@
 package vanilla.ownwaiter.repository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import vanilla.ownwaiter.entity.Restaurant;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -22,7 +21,6 @@ class RestaurantRepositoryTest {
 
     @BeforeEach
     void init() {
-        restaurantRepository.deleteAll();
         res = Restaurant.builder()
                 .name("김밥천국")
                 .location("서울 23")
@@ -30,10 +28,15 @@ class RestaurantRepositoryTest {
         restaurantRepository.save(res);
     }
 
+    @AfterEach
+    void clear() {
+        restaurantRepository.deleteAll();
+    }
+
     @Test
     void findById() {
-        Restaurant result = restaurantRepository.getById(res.getId());
-        assertEquals(result.getId(), res.getId());
+        Optional<Restaurant> result = restaurantRepository.findById(res.getId());
+        assertEquals(result.get().getId(), res.getId());
     }
 
     @Test
