@@ -71,6 +71,11 @@ class RestaurantServiceTest {
         assertEquals(restaurants.size(), 3);
     }
 
+    @Test
+    void likeByKeyword() {
+
+    }
+
 
 
 }
