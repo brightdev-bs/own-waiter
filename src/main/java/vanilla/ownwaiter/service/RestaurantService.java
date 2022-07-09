@@ -18,13 +18,6 @@ public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    @PostConstruct
-    void init() {
-        Restaurant res1 = Restaurant.builder().name("김밥천국1").location("도곡점").build();
-        Restaurant res2 = Restaurant.builder().name("김밥천국2").location("매봉점").build();
-        restaurantRepository.save(res1); restaurantRepository.save(res2);
-    }
-
     public Restaurant save(Restaurant restaurant) {
         // location이랑 이름을 합쳐서 저장하게 끔 하는게 좋을 것 같음.
         // bc 김밥천국 도곡점, 김밥천국 매봉점, 이런식으로 하기 위함.
