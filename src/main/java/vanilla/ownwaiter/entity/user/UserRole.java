@@ -1,6 +1,6 @@
 package vanilla.ownwaiter.entity.user;
 public enum UserRole {
-    USER("유저"), ADMIN("관리자");
+    USER("손님"), ADMIN("점주");
 
     private String role;
 
