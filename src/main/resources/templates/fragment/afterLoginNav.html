@@ -1,9 +1,6 @@
 <div class="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4"></ul>
 
-    <div th:text="${#authentication.getDetails()}"></div>
-    <div th:text="${#authentication.getPrincipal()}"></div>
-
     <div sec:authorize="hasRole('ROLE_ADMIN')"></div>
         <li class="nav-item" style="list-style: none" th:text="${#authentication.name}">관리자</li>
         <form method="post">
