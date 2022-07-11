@@ -2,12 +2,15 @@ package vanilla.ownwaiter.entity.user;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import vanilla.ownwaiter.entity.BaseEntity;
 import vanilla.ownwaiter.entity.Order;
+import vanilla.ownwaiter.entity.Restaurant;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,17 +25,29 @@ public class User extends BaseEntity implements UserDetails  {
     @Id @GeneratedValue
     @Column(name = "user_id")
     private Long id;
+
+    @NotNull
     private String username;
+    @NotNull
     private String email;
+    @NotNull
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Nullable
     private UserSex sex;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
     @OneToOne
+    @JoinColumn(name = "restaurant_id")
+    @Nullable
+    private Restaurant restaurant;
+
+    @OneToOne
+    @JoinColumn(name = "basket_id")
+    @Nullable
     private Basket basket;
 
     @OneToMany(mappedBy = "user", targetEntity = Order.class)
