@@ -10,7 +10,6 @@ import vanilla.ownwaiter.repository.UserRepository;
 import java.util.Optional;
 
 @Slf4j
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,7 +18,7 @@ public class UserService {
 
     public User save(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.encodePassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
     }

@@ -1,6 +1,7 @@
-package vanilla.ownwaiter.entity;
+package vanilla.ownwaiter.entity.user;
 
 import lombok.Getter;
+import vanilla.ownwaiter.entity.Item;
 
 import javax.persistence.*;
 import java.util.List;
