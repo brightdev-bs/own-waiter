@@ -1,14 +1,14 @@
 package vanilla.ownwaiter.entity;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
+import vanilla.ownwaiter.entity.user.Basket;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
-public class Item {
+public class Item extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "item_id")
@@ -21,6 +21,7 @@ public class Item {
     private Img img;
 
     @ManyToOne
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
