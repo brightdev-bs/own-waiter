@@ -30,16 +30,8 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String main(Model model) {
-
-        initData(model);
-
+    public String main() {
         return "/home";
-    }
-
-    private void initData(Model model) {
-        List<Restaurant> restaurants = getRestaurants();
-        model.addAttribute("restaurants", restaurants);
     }
 
     private List<Restaurant> getRestaurants() {

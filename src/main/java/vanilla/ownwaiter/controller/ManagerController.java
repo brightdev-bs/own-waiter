@@ -22,7 +22,7 @@ public class ManagerController {
         return "manager/homeManager";
     }
 
-    @GetMapping("/manager/foodList")
+    @GetMapping("/foodList")
     public String moveToFoodManage(Authentication auth, Model model) {
         User manager = (User) auth.getDetails();
         Restaurant findRes = restaurantService.findById(manager.getId());
@@ -30,7 +30,7 @@ public class ManagerController {
         return "/manager/foodList";
     }
 
-    @GetMapping("/manager/orderList")
+    @GetMapping("orderList")
     public String moveToOrderList(Authentication auth, Model model) {
         User manager = (User) auth.getDetails();
         Restaurant findRes = restaurantService.findById(manager.getId());
