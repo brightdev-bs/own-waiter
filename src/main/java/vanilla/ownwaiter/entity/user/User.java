@@ -1,25 +1,23 @@
 package vanilla.ownwaiter.entity.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import vanilla.ownwaiter.entity.Basket;
+import vanilla.ownwaiter.entity.BaseEntity;
+import vanilla.ownwaiter.entity.Order;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
 @Slf4j
-@Data
+@Getter
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class User extends BaseEntity implements UserDetails  {
 
     @Id @GeneratedValue
     @Column(name = "user_id")
@@ -34,11 +32,14 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @Transient
-    private Collection<GrantedAuthority> authorities;
-
     @OneToOne
     private Basket basket;
+
+    @OneToMany(mappedBy = "user", targetEntity = Order.class)
+    private List<Order> orders;
+
+    @Transient
+    private Collection<GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -77,4 +78,13 @@ public class User implements UserDetails {
         this.sex = sex;
         this.role = role;
     }
+
+    public void setAuthorities(Collection<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
+
 }

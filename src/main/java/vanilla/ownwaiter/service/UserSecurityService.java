@@ -23,9 +23,9 @@ public class UserSecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User siteUser = getSiteUser(email);
-        siteUser.setAuthorities(getGrantedAuthorities(siteUser));
-        return siteUser;
+        User user = getSiteUser(email);
+        user.setAuthorities(getGrantedAuthorities(user));
+        return user;
     }
 
     private User getSiteUser(String email) {

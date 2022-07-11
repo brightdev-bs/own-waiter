@@ -1,7 +1,6 @@
 package vanilla.ownwaiter.entity;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Entity
-public class Restaurant {
+public class Restaurant extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "restaurant_id")
@@ -19,9 +18,11 @@ public class Restaurant {
     @Embedded
     private Img logo;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "restaurant_id")
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Item> items;
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<Order> orders;
 
     public Restaurant() {}
 

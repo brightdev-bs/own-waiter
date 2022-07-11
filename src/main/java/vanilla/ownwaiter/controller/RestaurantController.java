@@ -2,12 +2,6 @@ package vanilla.ownwaiter.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import vanilla.ownwaiter.entity.Basket;
-import vanilla.ownwaiter.entity.Restaurant;
-import vanilla.ownwaiter.service.RestaurantService;
 
 @Controller
 @RequiredArgsConstructor
