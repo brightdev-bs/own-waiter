@@ -6,8 +6,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
             <th:block>
-                <div sec:authorize="isAnonymous()" th:replace="~{/fragment/beforeLoginNav}">로그인 전</div>
-                <div sec:authorize="isAuthenticated()" th:replace="~{/fragment/afterLoginNav}">로그인 후</div>
+                <div sec:authorize="isAnonymous()" th:replace="~{/login/fragment/beforeLoginNav}">로그인 전</div>
+                <div sec:authorize="isAuthenticated()" th:replace="~{/login/fragment/afterLoginNav}">로그인 후</div>
             </th:block>
         </div>
     </nav>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="">
+<html lang="kr" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
     <head th:insert="~{fragment/header :: header}"></head>
+
     <body class="container">
         <div th:replace="~{fragment/navbar :: nav}"></div>
 
@@ -14,15 +15,10 @@
             </div>
         </header>
 
-        <section sec:authorize="isAnonymous()" th:replace="~{homeUser :: homeUser}"></section>
+        <section sec:authorize="hasAnyAuthority('USER', 'ROLE_ANONYMOUS')" th:replace="~{homeUser :: homeUser}"></section>
+        <section sec:authorize="hasAuthority('ADMIN')" th:replace="~{manager/homeManager :: homeManager}"></section>
 
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy;Byeongsu KIM</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <div th:replace="~{/fragment/footer :: footer}"></div>
+
     </body>
 </html>
