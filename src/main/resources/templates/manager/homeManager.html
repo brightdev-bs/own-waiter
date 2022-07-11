@@ -1,22 +1,43 @@
-<section th:fragment="homeManager" class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
-                <div class="text-center" style="position: relative; top: 50%; transform: translateY(-50%)">
-                    <a class="p-4 btn btn-outline-dark mt-auto" href="/manager/foodList">음식 목록 관리</a>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="text-center" style="position: relative; top: 50%; transform: translateY(-50%)">
-                    <a class="p-4 btn btn-outline-dark mt-auto" href="/manager/orderList">주문 관리</a>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="kr" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragment/header :: header}"></head>
 
-            <form style="text-align: center" method="post">
-                <button type="submit" onclick="location.href='/'">가게 오픈</button>
-            </form>
-        </div>
-    </div>
-    </div>
-</section>
+    <body class="container">
+        <div th:replace="~{fragment/navbar :: nav}"></div>
+
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">너만의 웨이터</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">모든 음식 주문 쉽고, 빠르게 !!</p>
+                </div>
+            </div>
+        </header>
+
+        <section th:fragment="homeManager" class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="text-center" style="position: relative; top: 50%; transform: translateY(-50%)">
+                            <a class="p-4 btn btn-outline-dark mt-auto" href="/manager/foodList">음식 목록 관리</a>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="text-center" style="position: relative; top: 50%; transform: translateY(-50%)">
+                            <a class="p-4 btn btn-outline-dark mt-auto" href="/manager/orderList">주문 관리</a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <form style="text-align: center" method="post">
+                        <button class="btn btn-outline-secondary" type="submit" onclick="location.href='/'">가게 오픈</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div th:replace="~{/fragment/footer :: footer}"></div>
+    </body>
+</html>
 
