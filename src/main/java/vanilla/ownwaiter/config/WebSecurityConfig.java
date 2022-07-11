@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import vanilla.ownwaiter.handler.LoginSuccessHandler;
 import vanilla.ownwaiter.service.UserSecurityService;
 
 @Configuration
@@ -17,6 +18,7 @@ import vanilla.ownwaiter.service.UserSecurityService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserSecurityService userSecurityService;
+    private final LoginSuccessHandler loginSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .defaultSuccessUrl("/home")
                     .usernameParameter("email")
+                    .successHandler(loginSuccessHandler)
                     .permitAll()
                     .and()
                 .logout()
