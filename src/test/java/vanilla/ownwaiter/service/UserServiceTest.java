@@ -1,5 +1,6 @@
 package vanilla.ownwaiter.service;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        userService.deleteAll();
         user = User.builder()
                 .email("asd@naver.oom")
                 .password("123")
@@ -28,6 +28,11 @@ class UserServiceTest {
                 .role(UserRole.USER)
                 .build();
         userService.save(user);
+    }
+
+    @AfterEach
+    void clear() {
+        userService.deleteAll();
     }
 
     @Test

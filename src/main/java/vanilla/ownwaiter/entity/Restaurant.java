@@ -6,6 +6,7 @@ import vanilla.ownwaiter.entity.food.Food;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,23 +25,20 @@ public class Restaurant extends BaseEntity {
     private String description;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<Food> foods;
+    private List<Food> foods = new ArrayList<>();
 
     @OneToMany(mappedBy = "restaurant")
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     public Restaurant() {}
 
     @Builder
-
-    public Restaurant(Long id, String name, String location, String profileImg, String description, List<Food> foods, List<Order> orders) {
+    public Restaurant(Long id, String name, String location, String profileImg, String description) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.profileImg = profileImg;
         this.description = description;
-        this.foods = foods;
-        this.orders = orders;
     }
 
     public void setProfileImg(String profileImg) {

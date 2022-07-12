@@ -1,1 +1,30 @@
-주문 목록 (데이터 베이스 만들어야 함)
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragment/header :: header}">
+
+    </head>
+    <body>
+        <div class="container">
+            <div th:replace="~{fragment/navbar :: nav}"></div>
+            <table class="table-primary container p-1">
+                <thead>
+                    <tr>
+                        <th class="col-1 border-1">주문 번호</th>
+                        <th class="col-5 border-1">주문 정보</th>
+                        <th class="col-4 border-1">요청 정보</th>
+                        <th class="col-2 border-1">고객명</th>
+                    </tr>
+                </thead>
+                <tobdy>
+                    <tr th:each="order : ${orders}">
+                        <th th:text="${order.getId()}"></th>
+                        <th th:text="${order.restaurant.getFoods()}"></th>
+                        <th th:text="${order.userRequest}"></th>
+                        <th th:text="${order.user.getUsername()}"></th>
+                    </tr>
+                </tobdy>
+            </table>
+
+        </div>
+    </body>
+</html>

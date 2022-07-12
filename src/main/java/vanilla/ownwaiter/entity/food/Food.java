@@ -3,7 +3,6 @@ package vanilla.ownwaiter.entity.food;
 import lombok.Builder;
 import lombok.Getter;
 import vanilla.ownwaiter.entity.BaseEntity;
-import vanilla.ownwaiter.entity.Img;
 import vanilla.ownwaiter.entity.Restaurant;
 import vanilla.ownwaiter.entity.user.Basket;
 
@@ -21,8 +20,8 @@ public class Food extends BaseEntity {
     private String description;
     @Enumerated(EnumType.STRING)
     private FoodCategory category;
-    @Embedded
-    private Img img;
+
+    private String imgUrl;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
@@ -47,12 +46,13 @@ public class Food extends BaseEntity {
     }
 
     @Builder
-    public Food(Long id, String name, int price, String description, Img img, Restaurant restaurant, Basket basket) {
+    public Food(Long id, String name, int price, String description, FoodCategory category, String imgUrl, Restaurant restaurant, Basket basket) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.img = img;
+        this.category = category;
+        this.imgUrl = imgUrl;
         this.restaurant = restaurant;
         this.basket = basket;
     }

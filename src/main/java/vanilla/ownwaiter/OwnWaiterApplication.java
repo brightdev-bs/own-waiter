@@ -37,8 +37,6 @@ public class OwnWaiterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OwnWaiterApplication.class, args);
-
-
 	}
 
 }
