@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import vanilla.ownwaiter.entity.user.User;
+import vanilla.ownwaiter.entity.user.UserRole;
 
 import java.util.Optional;
 
@@ -23,6 +24,8 @@ class UserServiceTest {
         user = User.builder()
                 .email("asd@naver.oom")
                 .password("123")
+                .username("kim")
+                .role(UserRole.USER)
                 .build();
         userService.save(user);
     }
@@ -32,6 +35,7 @@ class UserServiceTest {
         User tester = User.builder()
                 .email("saveTest@naver.oom")
                 .password("save")
+                .username("test")
                 .build();
         User saveUser = userService.save(tester);
         assertEquals(tester.getId(), saveUser.getId());

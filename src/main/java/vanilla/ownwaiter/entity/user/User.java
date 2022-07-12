@@ -98,6 +98,10 @@ public class User extends BaseEntity implements UserDetails  {
         this.authorities = authorities;
     }
 
+    public void registerRestaurant(Restaurant restaurant){
+        this.restaurant = restaurant;
+    }
+
     public void encodePassword(String password) {
         this.password = password;
     }
