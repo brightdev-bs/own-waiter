@@ -1,1 +1,51 @@
-음식 리스트
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragment/header :: header}">
+
+    </head>
+    <body>
+        <div class="container">
+            <div th:replace="~{fragment/navbar :: nav}"></div>
+
+            <body class="container">
+            <!--  register food -->
+            <section>
+                <form class="m-2" action="/register/food" method="get" style="text-align: right">
+                    <button type="submit" class="btn btn-outline-secondary">음식 추가</button>
+                </form>
+            </section>
+
+            <!-- food section -->
+            <section>
+                <div class="card xs mt-2 mb-2">
+                    <div class="row">
+                        <div class="col-4 m-1 xs">
+                            <img src="https://dummyimage.com/100x100/000/fff" class="card-img" >
+                        </div>
+                        <div class="col-7">
+                            <div class="card-body">
+                                <h6 class="card-title">Card title</h6>
+                                <p class="card-text">This is a wider card with supporting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card xs mt-2 mb-2">
+                    <div class="row">
+                        <div class="col-4 m-1 xs">
+                            <img src="https://dummyimage.com/100x100/000/fff" class="card-img" >
+                        </div>
+                        <div class="col-7">
+                            <div class="card-body">
+                                <h6 class="card-title">Card title</h6>
+                                <p class="card-text">This is a wider card with supporting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </body>
+</html>

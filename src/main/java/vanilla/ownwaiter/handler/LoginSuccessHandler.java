@@ -25,6 +25,12 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         }
 
         if(role == UserRole.ADMIN) {
+
+            if (user.getRestaurant() == null) {
+                response.sendRedirect("/manager/register/restaurant");
+                return;
+            }
+
             response.sendRedirect("/manager");
         }
     }
