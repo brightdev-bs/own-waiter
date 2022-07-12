@@ -2,11 +2,10 @@ package vanilla.ownwaiter.entity.dto;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
-import vanilla.ownwaiter.entity.Img;
 import vanilla.ownwaiter.entity.Restaurant;
 
 @Data
-public class RestaurantForm {
+public class RestaurantRegisterForm {
 
     private String name;
     private String location;
