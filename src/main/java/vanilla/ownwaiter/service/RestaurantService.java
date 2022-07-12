@@ -29,9 +29,8 @@ public class RestaurantService {
     }
 
     @Transactional
-    public Restaurant uploadProfileAndSetImg(Restaurant restaurant, MultipartFile img) throws IOException {
-        String uploadUrl = s3Uploader.upload(img, "restaurant");
-        restaurant.setProfileImg(uploadUrl);
+    public Restaurant setImg(Restaurant restaurant, String img){
+        restaurant.setProfileImg(img);
         restaurantRepository.save(restaurant);
         return restaurant;
     }
