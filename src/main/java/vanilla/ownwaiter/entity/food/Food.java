@@ -1,22 +1,26 @@
-package vanilla.ownwaiter.entity;
+package vanilla.ownwaiter.entity.food;
 
 import lombok.Builder;
 import lombok.Getter;
+import vanilla.ownwaiter.entity.BaseEntity;
+import vanilla.ownwaiter.entity.Img;
+import vanilla.ownwaiter.entity.Restaurant;
 import vanilla.ownwaiter.entity.user.Basket;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
-public class Item extends BaseEntity {
+public class Food extends BaseEntity {
 
     @Id @GeneratedValue
-    @Column(name = "item_id")
+    @Column(name = "food_id")
     private Long id;
     private String name;
     private int price;
-
     private String description;
+    @Enumerated(EnumType.STRING)
+    private FoodCategory category;
     @Embedded
     private Img img;
 
@@ -30,8 +34,8 @@ public class Item extends BaseEntity {
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
 
-        if(!restaurant.getItems().contains(this)) {
-            restaurant.getItems().add(this);
+        if(!restaurant.getFoods().contains(this)) {
+            restaurant.getFoods().add(this);
         }
     }
 
@@ -39,11 +43,11 @@ public class Item extends BaseEntity {
         this.basket = basket;
     }
 
-    public Item() {
+    public Food() {
     }
 
     @Builder
-    public Item(Long id, String name, int price, String description, Img img, Restaurant restaurant, Basket basket) {
+    public Food(Long id, String name, int price, String description, Img img, Restaurant restaurant, Basket basket) {
         this.id = id;
         this.name = name;
         this.price = price;
