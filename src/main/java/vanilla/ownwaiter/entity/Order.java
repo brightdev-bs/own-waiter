@@ -22,4 +22,6 @@ public class Order extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    private String userRequest;
 }

@@ -1,7 +1,7 @@
 package vanilla.ownwaiter.entity.user;
 
 import lombok.Getter;
-import vanilla.ownwaiter.entity.Item;
+import vanilla.ownwaiter.entity.food.Food;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,19 +16,19 @@ public class Basket {
     private Long id;
 
     @OneToMany(mappedBy = "basket")
-    private List<Item> items;
+    private List<Food> foods;
 
-    public void addItem(Item item) {
-        this.items.add(item);
-        if(item.getBasket() != this) {
-            item.setBasket(this);
+    public void addItem(Food food) {
+        this.foods.add(food);
+        if(food.getBasket() != this) {
+            food.setBasket(this);
         }
     }
 
     public Basket() {}
 
-    public Basket(Long id, List<Item> items) {
+    public Basket(Long id, List<Food> foods) {
         this.id = id;
-        this.items = items;
+        this.foods = foods;
     }
 }
