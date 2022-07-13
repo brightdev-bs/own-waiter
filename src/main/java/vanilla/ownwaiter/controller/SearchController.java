@@ -20,13 +20,21 @@ public class SearchController {
 
     @GetMapping
     public String moveToSearch() {
-        return "/search/search";
+        return "/search/searchRestaurant";
     }
 
     @GetMapping("/restaurant")
     public String loadRestaurant(@RequestParam("input") String input, Model model) {
         List<Restaurant> restaurants = restaurantService.likeByKeyword(input);
         model.addAttribute("restaurants", restaurants);
-        return "/search/searchResult";
+        return "search/searchRestaurantResult";
+    }
+
+    @GetMapping("/restaurant/food")
+    public String loadFood(@RequestParam("restaurantId") Long restaurantId, Model model) {
+        System.out.println("SearchController.loadFood");
+        Restaurant res = restaurantService.findById(restaurantId);
+        model.addAttribute("foods", res.getFoods());
+        return "/search/restaurantFoodList";
     }
 }

@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import vanilla.ownwaiter.entity.Restaurant;
+import vanilla.ownwaiter.entity.food.Food;
 import vanilla.ownwaiter.entity.user.User;
+import vanilla.ownwaiter.repository.FoodRepository;
 import vanilla.ownwaiter.repository.RestaurantRepository;
 import vanilla.ownwaiter.service.UserService;
 
@@ -21,18 +23,17 @@ import java.util.Arrays;
 public class OwnWaiterApplication {
 
 	private final RestaurantRepository restaurantRepository;
-	private final UserService userService;
+	private final FoodRepository foodRepository;
 
 	@PostConstruct
 	void init() {
-		Restaurant res1 = Restaurant.builder().name("김밥천국1").location("도곡점").build();
-		Restaurant res2 = Restaurant.builder().name("김밥천국2").location("매봉점").build();
+		Restaurant res1 = Restaurant.builder().name("김밥천국1").location("도곡점").description("김밥천국입니다.").profileImgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").build();
+		Restaurant res2 = Restaurant.builder().name("김밥천국2").location("매봉점").description("김밥천국입니다.").profileImgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").build();
 		restaurantRepository.save(res1); restaurantRepository.save(res2);
 
-		User admin = User.builder().username("kim").email("manager@gmail.com").password("123").authorities(new ArrayList<GrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority("ADMIN")))).build();
-		User user = User.builder().username("lee").email("user@gmail.com").password("123").authorities(new ArrayList<GrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority("USER")))).build();
-		userService.save(admin);
-		userService.save(user);
+		Food food1 = Food.builder().name("음식1").description("김밥입니다").price(1000).imgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").restaurant(res1).build();
+		Food food2 = Food.builder().name("음식2").description("김밥2입니다").price(1500).imgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").restaurant(res1).build();
+		foodRepository.save(food1); foodRepository.save(food2);
 	}
 
 	public static void main(String[] args) {

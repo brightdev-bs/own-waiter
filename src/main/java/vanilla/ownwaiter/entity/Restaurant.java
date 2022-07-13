@@ -20,7 +20,7 @@ public class Restaurant extends BaseEntity {
     private String name;
     @NotNull
     private String location;
-    private String profileImg;
+    private String profileImgUrl;
 
     private String description;
 
@@ -33,15 +33,15 @@ public class Restaurant extends BaseEntity {
     public Restaurant() {}
 
     @Builder
-    public Restaurant(Long id, String name, String location, String profileImg, String description) {
+    public Restaurant(Long id, String name, String location, String profileImgUrl, String description) {
         this.id = id;
         this.name = name;
         this.location = location;
-        this.profileImg = profileImg;
+        this.profileImgUrl = profileImgUrl;
         this.description = description;
     }
 
-    public void setProfileImg(String profileImg) {
-        this.profileImg = profileImg;
+    public void setProfileImgUrl(String profileImg) {
+        this.profileImgUrl = profileImg;
     }
 }
