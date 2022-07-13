@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragment/header :: header}"></head>
+    <body class="container">
+        <div th:replace="~{fragment/navbar :: nav}"></div>
+
+        <h5 class="m-2"> 음식 목록 </h5>
+        <hr>
+        <!-- food section -->
+        <section>
+            <div class="card xs mt-2 mb-2" th:each="food : ${foods}">
+                <div class="row">
+                    <div class="col-4 xs">
+                        <img class="card-img" th:src="${food.imgUrl}" src="https://dummyimage.com/100x100/000/fff">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h6 th:text="${food.name}" class="card-title">음식 이름</h6>
+                            <div th:text="${food.description}" class="card-text">음식 소개</div>
+                            <div class="row m-auto">
+                                <div class="card-text col-5" style="display: inline-block" th:text="|${food.price}원|"></div>
+                                <div class="col-4"></div>
+                                <button type="button" onclick="getData()" class="btn btn-primary btn-sm col-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                    추가
+                                </button>
+                            </div>
+                        </div>
+                        <script th:inline="javascript">
+                            function getData() {
+                                alert("실행됨");
+
+                                let header = $("meta[name='_csrf_header']").attr("content");
+                                let token = $("meta[name='_csrf']").attr("content");
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/basket/add",
+                                    data: {
+                                        id: [[${food.id}]]
+                                    },
+                                    beforeSend: function(jqXHR) {
+                                        jqXHR.setRequestHeader(header, token);
+                                    },
+                                    success: function() {
+                                        console.log('success');
+                                    },
+                                    error: function onError(error) {
+                                        console.log(error);
+                                    }
+                                });
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

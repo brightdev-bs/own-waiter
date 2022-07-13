@@ -8,7 +8,7 @@
             <div th:replace="~{fragment/navbar :: nav}"></div>
             <form th:action th:object="${foodRegisterForm}" method="post" enctype="multipart/form-data">
                 <div class="form-group mb-2 mt-3">
-                    <label class="mb-2" for="name">음식점 이름</label>
+                    <label class="mb-2" for="name">음식 이름</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="음식점 이름">
                 </div>
                 <div class="form-group mb-2">

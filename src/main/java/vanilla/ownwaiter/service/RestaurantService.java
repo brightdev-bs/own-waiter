@@ -3,12 +3,10 @@ package vanilla.ownwaiter.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import vanilla.ownwaiter.entity.Restaurant;
 import vanilla.ownwaiter.file.S3Uploader;
 import vanilla.ownwaiter.repository.RestaurantRepository;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -30,7 +28,7 @@ public class RestaurantService {
 
     @Transactional
     public Restaurant setImg(Restaurant restaurant, String img){
-        restaurant.setProfileImg(img);
+        restaurant.setProfileImgUrl(img);
         restaurantRepository.save(restaurant);
         return restaurant;
     }
