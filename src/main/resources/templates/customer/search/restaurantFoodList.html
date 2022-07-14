@@ -30,8 +30,6 @@
                         </div>
                         <script th:inline="javascript">
                             function getData() {
-                                alert("실행됨");
-
                                 let header = $("meta[name='_csrf_header']").attr("content");
                                 let token = $("meta[name='_csrf']").attr("content");
 
@@ -45,7 +43,7 @@
                                         jqXHR.setRequestHeader(header, token);
                                     },
                                     success: function() {
-                                        console.log('success');
+                                        location.href = "http://localhost:8080/basket";
                                     },
                                     error: function onError(error) {
                                         console.log(error);

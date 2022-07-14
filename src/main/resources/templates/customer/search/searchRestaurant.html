@@ -4,14 +4,14 @@
     <body class="container">
         <div th:replace="~{fragment/navbar :: nav}"></div>
 
-        <form class="input-group mt-3 mb-3" th:action="@{/search/restaurant}" method="get">
+        <form class="input-group mt-3 mb-3" th:action="@{/customer/search/restaurant}" method="get">
             <input type="text" class="form-control m-1" name="input" placeholder="레스토랑 이름">
             <div class="input-group-append m-1">
                 <button class="btn btn-outline-secondary" type="submit">검색</button>
             </div>
         </form>
 
-        <form class="row" th:action="@{/search/recent/delete}">
+        <form class="row" th:action="@{/customer/search/recent/delete}">
             <div class="col m-1 pt-1">
                 최근검색어
             </div>

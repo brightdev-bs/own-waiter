@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vanilla.ownwaiter.constant.SessionConst;
+import vanilla.ownwaiter.entity.Basket;
 import vanilla.ownwaiter.entity.dto.JoinForm;
 import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.entity.user.UserRole;
 import vanilla.ownwaiter.entity.user.UserSex;
+import vanilla.ownwaiter.repository.BasketRepository;
 import vanilla.ownwaiter.service.UserService;
 import vanilla.ownwaiter.validator.JoinValidator;
 
@@ -28,7 +30,6 @@ import javax.servlet.http.HttpSession;
 public class JoinController {
 
     private final UserService userService;
-
     private final JoinValidator joinValidator;
 
     @GetMapping
@@ -49,13 +50,13 @@ public class JoinController {
             return "login/joinForm";
         }
 
-        User joinSiteUser = new User(joinForm.getUsername(), joinForm.getEmail(), joinForm.getPwd(),
-                joinForm.getSiteUserSex(joinForm.getSex()), joinForm.getSiteUserRole(joinForm.getRole()));
-        userService.save(joinSiteUser);
+        User joinUser = joinForm.toEntity(joinForm);
+        userService.save(joinUser);
 
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.MEMBER_ID, joinSiteUser.getId());
+        session.setAttribute(SessionConst.MEMBER_ID, joinUser.getId());
 
         return "redirect:/login";
     }
+
 }
