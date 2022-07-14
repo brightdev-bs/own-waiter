@@ -20,8 +20,10 @@ public class Order extends BaseEntity {
     private Restaurant restaurant;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "basket_id")
+    private Basket basket;
 
     private String userRequest;
+
+    //
 }

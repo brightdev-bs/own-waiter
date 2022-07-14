@@ -15,7 +15,7 @@
             </div>
         </header>
 
-        <section sec:authorize="hasAnyAuthority('USER', 'ROLE_ANONYMOUS')" th:replace="~{homeUser :: homeUser}"></section>
+        <section sec:authorize="hasAnyAuthority('USER', 'ROLE_ANONYMOUS')" th:replace="~{customer/homeUser :: homeUser}"></section>
         <section sec:authorize="hasAuthority('ADMIN')" th:replace="~{manager/homeManager :: homeManager}"></section>
 
         <div th:replace="~{/fragment/footer :: footer}"></div>
