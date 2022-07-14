@@ -2,10 +2,10 @@ package vanilla.ownwaiter.entity.food;
 
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.lang.Nullable;
 import vanilla.ownwaiter.entity.BaseEntity;
 import vanilla.ownwaiter.entity.BasketFood;
 import vanilla.ownwaiter.entity.Restaurant;
-import vanilla.ownwaiter.entity.user.Basket;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class Food extends BaseEntity {
 
     private String imgUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 

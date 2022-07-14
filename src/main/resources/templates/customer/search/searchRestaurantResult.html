@@ -6,7 +6,7 @@
 
         <h5 class="m-2"> 음식점 검색 </h5>
         <hr>
-        <form class="input-group mt-3 mb-3" th:action="@{/search/restaurant}" method="get">
+        <form class="input-group mt-3 mb-3" th:action="@{/templates/customer/search/restaurant}" method="get">
             <input type="text" class="form-control m-1" name="input" placeholder="레스토랑 이름">
             <div class="input-group-append m-1">
                 <button class="btn btn-outline-secondary" type="submit">검색</button>
@@ -15,7 +15,7 @@
 
         <table class="table">
             <tr th:each="res : ${restaurants}">
-                <a class="text-black text-decoration-none" th:href="@{/search/restaurant/food(restaurantId=${res.id})}">
+                <a class="text-black text-decoration-none" th:href="@{/customer/search/restaurant/food(restaurantId=${res.id})}">
                     <div class="row">
                         <div class="col-4 m-1 xs">
                             <img th:src="${res.profileImgUrl}" src="https://dummyimage.com/100x100/000/fff" class="card-img" >
