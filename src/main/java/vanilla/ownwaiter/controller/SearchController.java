@@ -12,7 +12,7 @@ import vanilla.ownwaiter.service.RestaurantService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/search")
+@RequestMapping("customer/search")
 @RequiredArgsConstructor
 public class SearchController {
 
@@ -20,14 +20,14 @@ public class SearchController {
 
     @GetMapping
     public String moveToSearch() {
-        return "/search/searchRestaurant";
+        return "customer/search/searchRestaurant";
     }
 
     @GetMapping("/restaurant")
     public String loadRestaurant(@RequestParam("input") String input, Model model) {
         List<Restaurant> restaurants = restaurantService.likeByKeyword(input);
         model.addAttribute("restaurants", restaurants);
-        return "search/searchRestaurantResult";
+        return "customer/search/searchRestaurantResult";
     }
 
     @GetMapping("/restaurant/food")
@@ -35,6 +35,6 @@ public class SearchController {
         System.out.println("SearchController.loadFood");
         Restaurant res = restaurantService.findById(restaurantId);
         model.addAttribute("foods", res.getFoods());
-        return "/search/restaurantFoodList";
+        return "customer/search/restaurantFoodList";
     }
 }
