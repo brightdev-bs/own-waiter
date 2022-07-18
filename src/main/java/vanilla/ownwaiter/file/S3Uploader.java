@@ -26,6 +26,9 @@ public class S3Uploader {
     private String bucket;
 
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
+        if(multipartFile.isEmpty()) {
+            return null;
+        }
         File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File 변환 실패"));
         return upload(uploadFile, dirName);
     }

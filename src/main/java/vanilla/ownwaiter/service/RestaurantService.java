@@ -1,6 +1,7 @@
 package vanilla.ownwaiter.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vanilla.ownwaiter.entity.Restaurant;
@@ -11,13 +12,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
-    private final S3Uploader s3Uploader;
+    private final String DEFAULT_IMG_URL = "http://placeimg.com/100/100/nature";
 
     @Transactional
     public Restaurant save(Restaurant restaurant) {
@@ -27,8 +29,11 @@ public class RestaurantService {
     }
 
     @Transactional
-    public Restaurant setImg(Restaurant restaurant, String img){
-        restaurant.setProfileImgUrl(img);
+    public Restaurant setImg(Restaurant restaurant, String imgUrl){
+        if(imgUrl.isEmpty()) {
+            restaurant.setProfileImgUrl(DEFAULT_IMG_URL);
+        }
+        restaurant.setProfileImgUrl(imgUrl);
         restaurantRepository.save(restaurant);
         return restaurant;
     }
