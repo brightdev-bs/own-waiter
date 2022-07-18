@@ -16,6 +16,7 @@ import vanilla.ownwaiter.entity.food.Food;
 import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.file.S3Uploader;
 import vanilla.ownwaiter.repository.FoodRepository;
+import vanilla.ownwaiter.repository.UserRepository;
 import vanilla.ownwaiter.service.RestaurantService;
 import vanilla.ownwaiter.service.UserService;
 
@@ -30,7 +31,7 @@ public class ManagerController {
 
     private final RestaurantService restaurantService;
     private final FoodRepository foodRepository;
-    private final UserService userService;
+    private final UserRepository userRepository;
     private final S3Uploader s3Uploader;
 
     @GetMapping
@@ -42,6 +43,26 @@ public class ManagerController {
         }
 
         return "manager/homeManager";
+    }
+
+    @GetMapping("/register/restaurant")
+    public String registerRestaurant(Model model) {
+        addRestaurantFormToModel(model);
+        return "/manager/registerRestaurantForm";
+    }
+
+    @PostMapping("/register/restaurant")
+    public String registerRestaurant(@ModelAttribute RestaurantRegisterForm restaurantRegisterForm, Authentication auth) throws IOException {
+        String uploadUrl = s3Uploader.upload(restaurantRegisterForm.getImg(), "restaurant");
+
+        Restaurant restaurant = restaurantService.setImg(restaurantRegisterForm.toEntity(), uploadUrl);
+        restaurantService.save(restaurant);
+
+        User user = getUser(auth);
+        user.registerRestaurant(restaurant);
+        userRepository.save(user);
+
+        return "redirect:/manager";
     }
 
     @GetMapping("/foodList")
@@ -77,25 +98,6 @@ public class ManagerController {
         Restaurant restaurant = manager.getRestaurant();
         model.addAttribute("orders", restaurant.getOrders());
         return "/manager/orderList";
-    }
-
-    @GetMapping("/register/restaurant")
-    public String registerRestaurant(Model model) {
-        addRestaurantFormToModel(model);
-        return "/manager/registerRestaurantForm";
-    }
-
-    @PostMapping("/register/restaurant")
-    public String registerRestaurant(@ModelAttribute RestaurantRegisterForm restaurantRegisterForm, Authentication auth) throws IOException {
-        String uploadUrl = s3Uploader.upload(restaurantRegisterForm.getImg(), "restaurant");
-        User user = getUser(auth);
-
-        Restaurant restaurant = restaurantService.setImg(restaurantRegisterForm.toEntity(), uploadUrl);
-        user.registerRestaurant(restaurant);
-
-        userService.save(user);
-
-        return "redirect:/manager";
     }
 
     private void addRestaurantFormToModel(Model model) {

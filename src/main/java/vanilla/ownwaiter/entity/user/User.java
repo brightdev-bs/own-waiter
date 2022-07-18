@@ -45,7 +45,7 @@ public class User extends BaseEntity implements UserDetails  {
     @Nullable
     private Restaurant restaurant;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "basket_id")
     private Basket basket;
 
