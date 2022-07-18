@@ -20,6 +20,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
         UserRole role = user.getRole();
+
         if(role == UserRole.USER) {
             response.sendRedirect("/home");
         }

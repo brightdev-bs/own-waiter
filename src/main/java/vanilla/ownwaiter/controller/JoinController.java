@@ -53,9 +53,6 @@ public class JoinController {
         User joinUser = joinForm.toEntity(joinForm);
         userService.save(joinUser);
 
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.MEMBER_ID, joinUser.getId());
-
         return "redirect:/login";
     }
 

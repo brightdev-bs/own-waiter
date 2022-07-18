@@ -24,21 +24,21 @@ class UserServiceTest {
     private BasketRepository basketRepository;
     private User user;
 
-//    @BeforeEach
-//    void setUp() {
-//        user = User.builder()
-//                .email("asd@naver.oom")
-//                .password("123")
-//                .username("kim")
-//                .role(UserRole.USER)
-//                .build();
-//        userService.save(user);
-//    }
-//
-//    @AfterEach
-//    void clear() {
-//        userService.deleteAll();
-//    }
+    @BeforeEach
+    void setUp() {
+        user = User.builder()
+                .email("asd@naver.oom")
+                .password("123")
+                .username("kim")
+                .role(UserRole.USER)
+                .build();
+        userService.save(user);
+    }
+
+    @AfterEach
+    void clear() {
+        userService.deleteAll();
+    }
 
     @Test
     void save() {
