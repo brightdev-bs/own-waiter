@@ -1,5 +1,6 @@
 package vanilla.ownwaiter.controller;
 
+import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -18,10 +19,9 @@ import vanilla.ownwaiter.file.S3Uploader;
 import vanilla.ownwaiter.repository.FoodRepository;
 import vanilla.ownwaiter.repository.UserRepository;
 import vanilla.ownwaiter.service.RestaurantService;
-import vanilla.ownwaiter.service.UserService;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Controller
@@ -52,11 +52,11 @@ public class ManagerController {
     }
 
     @PostMapping("/register/restaurant")
-    public String registerRestaurant(@ModelAttribute RestaurantRegisterForm restaurantRegisterForm, Authentication auth) throws IOException {
+    public String registerRestaurant(@ModelAttribute RestaurantRegisterForm restaurantRegisterForm, Authentication auth) throws IOException, WriterException {
         String uploadUrl = s3Uploader.upload(restaurantRegisterForm.getImg(), "restaurant");
 
         Restaurant restaurant = restaurantService.setImg(restaurantRegisterForm.toEntity(), uploadUrl);
-        restaurantService.save(restaurant);
+        restaurantService.saveWithQr(restaurant);
 
         User user = getUser(auth);
         user.registerRestaurant(restaurant);
@@ -67,8 +67,8 @@ public class ManagerController {
 
     @GetMapping("/foodList")
     public String moveToFoodList(Authentication auth, Model model) {
-        User manager = getUser(auth);
-        model.addAttribute("foods", manager.getRestaurant().getFoods());
+        User user = getUser(auth);
+        model.addAttribute("foods", user.getRestaurant().getFoods());
         return "/manager/foodList";
     }
 
@@ -100,12 +100,22 @@ public class ManagerController {
         return "/manager/orderList";
     }
 
+    @GetMapping("qr")
+    public String moveToRestaurantQr(Authentication auth, Model model) {
+        User manager = getUser(auth);
+        Restaurant restaurant = manager.getRestaurant();
+        model.addAttribute("qr", restaurant.getQrCodeUrl());
+        return "/manager/restaurantQr";
+    }
+
+
     private void addRestaurantFormToModel(Model model) {
         model.addAttribute("restaurantRegisterForm", new RestaurantRegisterForm());
     }
 
     private User getUser(Authentication auth) {
-        User user = (User) auth.getPrincipal();
+        User persistence = (User) auth.getPrincipal();
+        User user = userRepository.findById(persistence.getId()).orElseThrow(() -> new NoSuchElementException());
         return user;
     }
 }

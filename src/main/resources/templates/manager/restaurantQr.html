@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragment/header :: header}">
+
+    </head>
+
+    <body class="container" style="text-align: center">
+        <div th:replace="~{fragment/navbar :: nav}"></div>
+        <div>
+            <img class="img-fluid" th:src="@{${qr}}" width="500px" alt="qr이미지"/>
+        </div>
+    </body>
+</html>
