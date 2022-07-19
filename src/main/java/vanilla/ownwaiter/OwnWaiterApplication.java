@@ -27,12 +27,12 @@ public class OwnWaiterApplication {
 
 	@PostConstruct
 	void init() {
-		Restaurant res1 = Restaurant.builder().name("김밥천국1").location("도곡점").description("김밥천국입니다.").profileImgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").build();
-		Restaurant res2 = Restaurant.builder().name("김밥천국2").location("매봉점").description("김밥천국입니다.").profileImgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").build();
+		Restaurant res1 = Restaurant.builder().name("김밥천국1").location("도곡점").description("김밥천국입니다.").profileImgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/qr/d3798585-f3dc-44c7-b0b3-99bff1f4019b.png").build();
+		Restaurant res2 = Restaurant.builder().name("김밥천국2").location("매봉점").description("김밥천국입니다.").profileImgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/qr/d3798585-f3dc-44c7-b0b3-99bff1f4019b.png").build();
 		restaurantRepository.save(res1); restaurantRepository.save(res2);
 
-		Food food1 = Food.builder().name("음식1").description("김밥입니다").price(1000).imgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").restaurant(res1).build();
-		Food food2 = Food.builder().name("음식2").description("김밥2입니다").price(1500).imgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/food/01048796-70f3-48b9-a16d-5419befb56f2.png").restaurant(res1).build();
+		Food food1 = Food.builder().name("음식1").description("김밥입니다").price(1000).imgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/qr/d3798585-f3dc-44c7-b0b3-99bff1f4019b.png").restaurant(res1).build();
+		Food food2 = Food.builder().name("음식2").description("김밥2입니다").price(1500).imgUrl("https://waiterbucket.s3.ap-northeast-2.amazonaws.com/qr/d3798585-f3dc-44c7-b0b3-99bff1f4019b.png").restaurant(res1).build();
 		foodRepository.save(food1); foodRepository.save(food2);
 	}
 

@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vanilla.ownwaiter.entity.Restaurant;
-import vanilla.ownwaiter.file.S3Uploader;
 import vanilla.ownwaiter.repository.RestaurantRepository;
 
 import java.util.List;
@@ -19,21 +18,29 @@ import java.util.Optional;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final QrCodeService qrCodeService;
     private final String DEFAULT_IMG_URL = "http://placeimg.com/100/100/nature";
 
     @Transactional
     public Restaurant save(Restaurant restaurant) {
-        // location이랑 이름을 합쳐서 저장하게 끔 하는게 좋을 것 같음.
-        // bc 김밥천국 도곡점, 김밥천국 매봉점, 이런식으로 하기 위함.
+        return restaurantRepository.save(restaurant);
+    }
+
+    @Transactional
+    public Restaurant saveWithQr(Restaurant restaurant) {
+        String uploadUrl = qrCodeService.generateAndUpload(restaurant.getId());
+        restaurant.setQrCodeUrl(uploadUrl);
         return restaurantRepository.save(restaurant);
     }
 
     @Transactional
     public Restaurant setImg(Restaurant restaurant, String imgUrl){
-        if(imgUrl.isEmpty()) {
+        if(imgUrl == null)
             restaurant.setProfileImgUrl(DEFAULT_IMG_URL);
-        }
-        restaurant.setProfileImgUrl(imgUrl);
+
+        if(imgUrl != null)
+            restaurant.setProfileImgUrl(imgUrl);
+
         restaurantRepository.save(restaurant);
         return restaurant;
     }
