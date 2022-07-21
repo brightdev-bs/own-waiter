@@ -1,22 +1,19 @@
 package vanilla.ownwaiter.service;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vanilla.ownwaiter.entity.Basket;
-import vanilla.ownwaiter.entity.BasketFood;
+import vanilla.ownwaiter.entity.basket.BasketFood;
 import vanilla.ownwaiter.entity.food.Food;
 import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.repository.BasketFoodRepository;
 import vanilla.ownwaiter.repository.BasketRepository;
 import vanilla.ownwaiter.repository.FoodRepository;
-import vanilla.ownwaiter.repository.UserRepository;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Slf4j
 @Service

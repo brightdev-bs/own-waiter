@@ -2,6 +2,7 @@ package vanilla.ownwaiter.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,8 @@ import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.repository.BasketRepository;
 import vanilla.ownwaiter.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -23,6 +26,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final BasketRepository basketRepository;
 
+    private final int MAX_SEARCH_COUNT = 4;
     @Transactional
     public User save(JoinForm joinForm) {
         User user = persistUser(joinForm.toEntity(joinForm));
@@ -65,5 +69,41 @@ public class UserService {
 
     public void deleteAll() {
         userRepository.deleteAll();
+    }
+
+    @Transactional
+    public void addSearchHistory(Long userId, String input) {
+        User user = findById(userId).orElseThrow(() -> new NoSuchElementException("유저의 정보를 확인할 수 없습니다."));
+
+        List<String> searchHistory = user.getSearchHistories();
+        if(!searchHistory.contains(input)) {
+            searchHistory.add(input);
+        }
+
+        log.info("searchHistory = {}", searchHistory);
+        userRepository.save(user);
+    }
+
+    public User getUserByAuth(Authentication auth) {
+        return (User) auth.getPrincipal();
+    }
+    public List<String> sortSearchHistory(Authentication auth) {
+        User user = getUserByAuth(auth);
+        User persistUser = userRepository.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("인증되지 않은 사용자입나다."));
+
+        List<String> searchHistories = persistUser.getSearchHistories();
+        if(searchHistories.size() < MAX_SEARCH_COUNT) {
+            return searchHistories;
+        }
+
+        List<String> resultList = new ArrayList<>();
+        if(searchHistories.size() >= MAX_SEARCH_COUNT) {
+            for(int i = 0; i < MAX_SEARCH_COUNT; i++) {
+                resultList.add(searchHistories.get(MAX_SEARCH_COUNT - 1));
+            }
+        }
+
+        userRepository.save(persistUser);
+        return resultList;
     }
 }

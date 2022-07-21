@@ -1,4 +1,4 @@
-package vanilla.ownwaiter.entity;
+package vanilla.ownwaiter.entity.basket;
 
 
 import lombok.Getter;

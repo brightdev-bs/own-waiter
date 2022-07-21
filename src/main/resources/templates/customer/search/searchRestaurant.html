@@ -21,10 +21,7 @@
         </form>
 
         <div class="row ps-3 pe-3 mb-3">
-            <span class="col-sm-3 badge rounded-pill bg-primary">Primary</span>
-            <span class="col-sm-3 badge rounded-pill bg-secondary">Secondary</span>
-            <span class="col-sm-3 badge rounded-pill bg-success">Success</span>
-            <span class="col-sm-3 badge rounded-pill bg-danger">Danger</span>
+            <span class="col-sm-3 badge rounded-pill bg-primary mb-2" th:each="history : ${histories}" th:text="${history}"></span>
         </div>
 
 

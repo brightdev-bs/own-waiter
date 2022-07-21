@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vanilla.ownwaiter.entity.Basket;
-import vanilla.ownwaiter.entity.BasketFood;
+import vanilla.ownwaiter.entity.basket.BasketFood;
 import vanilla.ownwaiter.service.BasketFoodService;
 
 
