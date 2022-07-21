@@ -2,6 +2,7 @@ package vanilla.ownwaiter.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import vanilla.ownwaiter.entity.basket.BaseEntity;
 import vanilla.ownwaiter.entity.food.Food;
 
 import javax.persistence.*;

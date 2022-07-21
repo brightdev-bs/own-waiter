@@ -2,7 +2,7 @@ package vanilla.ownwaiter.entity;
 
 
 import lombok.Getter;
-import vanilla.ownwaiter.entity.user.User;
+import vanilla.ownwaiter.entity.basket.BaseEntity;
 
 import javax.persistence.*;
 

@@ -1,4 +1,7 @@
-package vanilla.ownwaiter.entity;
+package vanilla.ownwaiter.entity.basket;
+
+import vanilla.ownwaiter.entity.Basket;
+import vanilla.ownwaiter.entity.Order;
 
 import javax.persistence.*;
 

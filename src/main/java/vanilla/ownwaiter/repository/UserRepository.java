@@ -24,6 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u left join fetch u.restaurant where u.id =:id")
     User findRestaurantFetchJoin(@Param("id")  Long id);
 
-    @Query("select u, r from User u, Restaurant r left join fetch r.foods")
-    List<Food> findRestaurantFoodFetchJoin();
+    @Query("select u from User u left join fetch u.searchHistories where u.id =:id")
+    List<String> findSearchHistoryByFetchJoin(@Param("id") Long id);
 }

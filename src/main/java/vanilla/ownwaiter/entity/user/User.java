@@ -5,16 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import vanilla.ownwaiter.entity.BaseEntity;
+import vanilla.ownwaiter.entity.basket.BaseEntity;
 import vanilla.ownwaiter.entity.Basket;
-import vanilla.ownwaiter.entity.Order;
 import vanilla.ownwaiter.entity.Restaurant;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -51,6 +50,9 @@ public class User extends BaseEntity implements UserDetails  {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "basket_id")
     private Basket basket;
+
+    @ElementCollection
+    private List<String> searchHistories = new ArrayList<>();
 
     @Transient
     private Collection<GrantedAuthority> authorities;
