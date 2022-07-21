@@ -1,10 +1,7 @@
 package vanilla.ownwaiter.entity;
 
-import lombok.Builder;
 import lombok.Getter;
-import org.springframework.lang.Nullable;
-import vanilla.ownwaiter.entity.BasketFood;
-import vanilla.ownwaiter.entity.food.Food;
+import vanilla.ownwaiter.entity.basket.BasketFood;
 import vanilla.ownwaiter.entity.user.User;
 
 import javax.persistence.*;

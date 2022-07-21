@@ -1,7 +1,8 @@
-package vanilla.ownwaiter.entity;
+package vanilla.ownwaiter.entity.basket;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import vanilla.ownwaiter.entity.Basket;
 import vanilla.ownwaiter.entity.food.Food;
 
 import javax.persistence.*;
