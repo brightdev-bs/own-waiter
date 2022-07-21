@@ -10,13 +10,16 @@ import vanilla.ownwaiter.entity.food.Food;
 import vanilla.ownwaiter.entity.user.User;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 @Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByEmail(@Param("email") String email);
+    Optional<User> findByEmail(@Param("email") String email);
+
+    Optional<User> findByUsername(@Param("username") String username);
 
     @Query("select u from User u left join fetch u.restaurant where u.id =:id")
     User findRestaurantFetchJoin(@Param("id")  Long id);

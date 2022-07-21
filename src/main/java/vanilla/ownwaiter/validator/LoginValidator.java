@@ -9,6 +9,8 @@ import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.entity.dto.LoginForm;
 import vanilla.ownwaiter.service.UserService;
 
+import java.util.Optional;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -25,14 +27,14 @@ public class LoginValidator implements Validator {
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;
 
-        User loginSiteUser = userService.findByEmail(loginForm.getEmail());
-        if(loginSiteUser == null) {
+        Optional<User> user = userService.findByEmail(loginForm.getEmail());
+        if(user.isPresent()) {
             errors.rejectValue("email", "notExist");
             return;
         }
 
-        if (!loginSiteUser.getPassword().equals(loginForm.getPassword())) {
-            log.info("비밀번호 불일치");
+        String password = user.get().getPassword();
+        if (!password.equals(loginForm.getPassword())) {
             errors.rejectValue("pwd", "notMatch");
             return;
         }

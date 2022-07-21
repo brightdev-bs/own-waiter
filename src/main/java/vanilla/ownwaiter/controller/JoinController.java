@@ -10,18 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import vanilla.ownwaiter.constant.SessionConst;
-import vanilla.ownwaiter.entity.Basket;
 import vanilla.ownwaiter.entity.dto.JoinForm;
-import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.entity.user.UserRole;
 import vanilla.ownwaiter.entity.user.UserSex;
-import vanilla.ownwaiter.repository.BasketRepository;
 import vanilla.ownwaiter.service.UserService;
 import vanilla.ownwaiter.validator.JoinValidator;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -35,25 +28,29 @@ public class JoinController {
     @GetMapping
     public String loadJoinForm(Model model) {
         model.addAttribute(new JoinForm());
-        model.addAttribute("userSex", UserSex.values());
-        model.addAttribute("userRole", UserRole.values());
+        addModelForEnum(model);
         return "login/joinForm";
     }
 
     @PostMapping
-    public String joinUser(@Validated @ModelAttribute JoinForm joinForm, BindingResult bindingResult, HttpServletRequest request) {
+    public String joinUser(@Validated @ModelAttribute JoinForm joinForm, BindingResult bindingResult, Model model) {
 
         joinValidator.validate(joinForm, bindingResult);
 
         if(bindingResult.hasErrors()) {
             log.info("joinUser errors = {}", bindingResult);
+            addModelForEnum(model);
             return "login/joinForm";
         }
 
-        User joinUser = joinForm.toEntity(joinForm);
-        userService.save(joinUser);
+        userService.save(joinForm);
 
         return "redirect:/login";
+    }
+
+    private void addModelForEnum(Model model) {
+        model.addAttribute("userSex", UserSex.values());
+        model.addAttribute("userRole", UserRole.values());
     }
 
 }

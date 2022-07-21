@@ -6,12 +6,19 @@ import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.entity.user.UserRole;
 import vanilla.ownwaiter.entity.user.UserSex;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 @Slf4j
 @Data
 public class JoinForm {
+    @NotBlank
     String username;
+    @NotBlank
     String email;
+    @NotBlank
     String pwd;
+    @NotBlank
     String pwd2;
     String sex;
     String role;
