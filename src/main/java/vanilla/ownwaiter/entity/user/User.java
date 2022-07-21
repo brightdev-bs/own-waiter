@@ -11,6 +11,9 @@ import vanilla.ownwaiter.entity.Order;
 import vanilla.ownwaiter.entity.Restaurant;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
@@ -26,9 +29,9 @@ public class User extends BaseEntity implements UserDetails  {
     @Column(name = "user_id")
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String username;
-    @NotNull
+    @Email
     private String email;
     @NotNull
     private String password;

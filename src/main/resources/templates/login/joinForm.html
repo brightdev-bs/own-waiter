@@ -41,26 +41,28 @@
                             <form action="/main.html" th:action th:object="${joinForm}" method="post">
                                 <div class="form-floating mb-3">
                                     <label for="username">사용자 이름</label>
-                                    <input type="text" id="username" th:field="*{username}" class="form-control">
+                                    <input type="text" id="username" th:field="*{username}" th:errorclass="field-error" class="form-control">
+                                    <div class="field-error ms-2 mt-1" th:errors="*{username}"></div>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="email" id="email" class="form-control" th:field="*{email}" placeholder="name@example.com">
                                     <label for="email">이메일 주소</label>
-<!--                                    <div class="field-error" th:errors="*{email}">이메일 오류</div>-->
+                                    <input type="email" id="email" class="form-control" th:field="*{email}" th:errorclass="field-error" placeholder="name@example.com">
+                                    <div class="field-error ms-2 mt-1" th:errors="*{email}">이메일 오류</div>
                                 </div>
 
                                 <hr>
 
                                 <div class="form-floating mb-3">
-                                    <input type="password" id="pwd" class="form-control" th:field="*{pwd}" placeholder="Password">
                                     <label for="pwd">패스워드</label>
+                                    <input type="password" id="pwd" class="form-control" th:field="*{pwd}" th:errorclass="field-error" placeholder="Password">
+                                    <div class="field-error ms-2 mt-1" th:errors="*{pwd}">빈 공백 안됩니다.</div>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="password" id="pwd2" class="form-control" th:field="*{pwd2}" placeholder="Confirm Password">
                                     <label for="pwd2">패스워드 확인</label>
-<!--                                    <div class="field-error" th:errors="*{pwd2}">패스 워드 불일치</div>-->
+                                    <input type="password" id="pwd2" class="form-control" th:field="*{pwd2}" th:errorclass="field-error" placeholder="Confirm Password">
+                                    <div class="field-error ms-2 mt-1" th:errors="*{pwd2}">패스 워드 불일치</div>
                                 </div>
 
                                 <div class="form-floating mb-3">

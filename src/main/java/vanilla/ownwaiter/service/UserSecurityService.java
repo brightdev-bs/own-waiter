@@ -13,6 +13,7 @@ import vanilla.ownwaiter.entity.user.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
@@ -29,10 +30,7 @@ public class UserSecurityService implements UserDetailsService {
     }
 
     private User getSiteUser(String email) {
-        User findUser = userService.findByEmail(email);
-        if (findUser == null) {
-            throw new UsernameNotFoundException("존재 하지 않는 유저입니다.");
-        }
+        User findUser = userService.findByEmail(email).orElseThrow(() -> new NoSuchElementException("존재 하지 않는 유저입니다."));
         return findUser;
     }
 

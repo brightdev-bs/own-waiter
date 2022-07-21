@@ -1,5 +1,6 @@
 package vanilla.ownwaiter.repository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +16,30 @@ class UserRepositoryTest {
     private UserRepository userRepository;
 
     @BeforeEach
-    void setUp() {
-        userRepository.deleteAll();
-    }
-
-    @Test
-    void findByEmail() {
+    void init() {
         User user = User.builder()
                 .email("asd@naver.com")
                 .password("123")
                 .username("kim")
                 .build();
         userRepository.save(user);
+    }
 
+    @AfterEach
+    void clear() {
+        userRepository.deleteAll();
+    }
+
+    @Test
+    void findByEmail() {
         User findUser = userRepository.findByEmail("asd@naver.com");
+        assertEquals(findUser.getEmail(),"asd@naver.com");
         assertEquals(findUser.getUsername(), "kim");
+    }
+
+    @Test
+    void findByUsername() {
+        User user = userRepository.findByUsername("kim");
+        assertEquals(user.getUsername(), "kim");
     }
 }
