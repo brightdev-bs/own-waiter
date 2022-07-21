@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Component
 public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
@@ -23,7 +24,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
         if(exception instanceof BadCredentialsException) {
             errorMessage = "아이디 또는 비밀번호가 맞지 않습니다.";
         } else if (exception instanceof InternalAuthenticationServiceException) {
-            errorMessage = "내부적으로 발생한 시스템 문제로 인해 요청을 처리할 수 없습ㄴ시다.";
+            errorMessage = "내부적으로 발생한 시스템 문제로 인해 요청을 처리할 수 없습니다.";
         } else if (exception instanceof UsernameNotFoundException) {
             errorMessage = "계정이 존재하지 않습니다.";
         } else if (exception instanceof AuthenticationCredentialsNotFoundException) {
@@ -32,7 +33,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
             errorMessage = "알수 없는 이유로 로그인에 실패하였습니다.";
         }
 
-        System.out.println(errorMessage);
+        errorMessage = URLEncoder.encode(errorMessage, "UTF-8");
 
         setDefaultFailureUrl("/login?error=true&exception=" + errorMessage);
 
