@@ -17,8 +17,6 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-    private final RestaurantService restaurantService;
-
     @ModelAttribute
     public Restaurant restaurant() {
         return new Restaurant();
@@ -32,9 +30,5 @@ public class HomeController {
     @GetMapping("/home")
     public String main() {
         return "/home";
-    }
-
-    private List<Restaurant> getRestaurants() {
-        return restaurantService.findAll();
     }
 }

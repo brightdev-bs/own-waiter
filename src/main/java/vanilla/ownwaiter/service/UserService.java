@@ -80,18 +80,11 @@ public class UserService {
             searchHistory.add(input);
         }
 
-        log.info("searchHistory = {}", searchHistory);
         userRepository.save(user);
     }
-
-    public User getUserByAuth(Authentication auth) {
-        return (User) auth.getPrincipal();
-    }
-    public List<String> sortSearchHistory(Authentication auth) {
-        User user = getUserByAuth(auth);
-        User persistUser = userRepository.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("인증되지 않은 사용자입나다."));
-
-        List<String> searchHistories = persistUser.getSearchHistories();
+    public List<String> sortSearchHistory(User u) {
+        User user = userRepository.findById(u.getId()).orElseThrow(() -> new NoSuchElementException());
+        List<String> searchHistories = user.getSearchHistories();
         if(searchHistories.size() < MAX_SEARCH_COUNT) {
             return searchHistories;
         }
@@ -103,7 +96,7 @@ public class UserService {
             }
         }
 
-        userRepository.save(persistUser);
+        userRepository.save(user);
         return resultList;
     }
 }

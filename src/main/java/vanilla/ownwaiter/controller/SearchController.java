@@ -2,6 +2,8 @@ package vanilla.ownwaiter.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,15 +25,14 @@ public class SearchController {
     private final UserService userService;
 
     @GetMapping
-    public String moveToSearch(Authentication auth, Model model) {
-        model.addAttribute("histories", userService.sortSearchHistory(auth));
+    public String moveToSearch(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("histories", userService.sortSearchHistory(user));
         return "customer/search/searchRestaurant";
     }
 
     @GetMapping("/restaurant")
     public String loadRestaurant(@RequestParam("input") String input,
-                                 Authentication auth, Model model) {
-        User user = userService.getUserByAuth(auth);
+                                 @AuthenticationPrincipal User user, Model model) {
         userService.addSearchHistory(user.getId(), input);
         List<Restaurant> restaurants = restaurantService.likeByKeyword(input);
         model.addAttribute("restaurants", restaurants);
