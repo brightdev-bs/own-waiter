@@ -28,17 +28,13 @@ public class BasketController {
     public String moveToBasket(Authentication auth, Model model) {
         Basket basket = basketFoodService.getBasket(auth);
         List<BasketFood> basketFoods = basket.getBasketFoods();
-        log.info("BasektFoods = {}", basketFoods);
         model.addAttribute("basketFoods", basketFoods);
-
         return "/customer/basket";
     }
 
     @PostMapping("/add")
     public String addFoodToBasket(@RequestParam String id, Authentication auth) {
-
         basketFoodService.save(id, auth);
-
         return "redirect:/basket";
     }
 
