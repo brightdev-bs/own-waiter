@@ -4,6 +4,7 @@ import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +36,7 @@ public class ManagerController {
     private final S3Uploader s3Uploader;
 
     @GetMapping
-    public String loadPage(Authentication auth, Model model) {
-        User user = getUser(auth);
+    public String loadPage(@AuthenticationPrincipal User user, Model model) {
         if(user.getRestaurant() == null) {
             addRestaurantFormToModel(model);
             return "redirect:/manager/register/restaurant";
@@ -52,13 +52,13 @@ public class ManagerController {
     }
 
     @PostMapping("/register/restaurant")
-    public String registerRestaurant(@ModelAttribute RestaurantRegisterForm restaurantRegisterForm, Authentication auth) throws IOException, WriterException {
+    public String registerRestaurant(@ModelAttribute RestaurantRegisterForm restaurantRegisterForm,
+                                     @AuthenticationPrincipal User user) throws IOException {
         String uploadUrl = s3Uploader.upload(restaurantRegisterForm.getImg(), "restaurant");
 
         Restaurant restaurant = restaurantService.setImg(restaurantRegisterForm.toEntity(), uploadUrl);
         restaurantService.saveWithQr(restaurant);
 
-        User user = getUser(auth);
         user.registerRestaurant(restaurant);
         userRepository.save(user);
 
@@ -66,8 +66,7 @@ public class ManagerController {
     }
 
     @GetMapping("/foodList")
-    public String moveToFoodList(Authentication auth, Model model) {
-        User user = getUser(auth);
+    public String moveToFoodList(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("foods", user.getRestaurant().getFoods());
         return "/manager/foodList";
     }
@@ -79,10 +78,10 @@ public class ManagerController {
     }
 
     @PostMapping("/register/food")
-    public String registerFood(@ModelAttribute FoodRegisterForm foodRegisterForm, Authentication auth) throws IOException {
+    public String registerFood(@ModelAttribute FoodRegisterForm foodRegisterForm,
+                               @AuthenticationPrincipal User user) throws IOException {
         String uploadUrl = s3Uploader.upload(foodRegisterForm.getImg(), "food");
 
-        User user = getUser(auth);
         Restaurant restaurant = user.getRestaurant();
 
         Food food = foodRegisterForm.toEntity(foodRegisterForm, uploadUrl);
@@ -93,16 +92,14 @@ public class ManagerController {
     }
 
     @GetMapping("orderList")
-    public String moveToOrderList(Authentication auth, Model model) {
-        User manager = getUser(auth);
+    public String moveToOrderList(@AuthenticationPrincipal User manager, Model model) {
         Restaurant restaurant = manager.getRestaurant();
         model.addAttribute("orders", restaurant.getOrders());
         return "/manager/orderList";
     }
 
     @GetMapping("qr")
-    public String moveToRestaurantQr(Authentication auth, Model model) {
-        User manager = getUser(auth);
+    public String moveToRestaurantQr(@AuthenticationPrincipal User manager, Model model) {
         Restaurant restaurant = manager.getRestaurant();
         model.addAttribute("qr", restaurant.getQrCodeUrl());
         return "/manager/restaurantQr";
@@ -111,11 +108,5 @@ public class ManagerController {
 
     private void addRestaurantFormToModel(Model model) {
         model.addAttribute("restaurantRegisterForm", new RestaurantRegisterForm());
-    }
-
-    private User getUser(Authentication auth) {
-        User persistence = (User) auth.getPrincipal();
-        User user = userRepository.findById(persistence.getId()).orElseThrow(() -> new NoSuchElementException());
-        return user;
     }
 }
