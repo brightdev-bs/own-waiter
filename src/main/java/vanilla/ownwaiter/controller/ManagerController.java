@@ -15,6 +15,7 @@ import vanilla.ownwaiter.entity.Restaurant;
 import vanilla.ownwaiter.entity.dto.FoodRegisterForm;
 import vanilla.ownwaiter.entity.dto.RestaurantRegisterForm;
 import vanilla.ownwaiter.entity.food.Food;
+import vanilla.ownwaiter.entity.food.FoodCategory;
 import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.file.S3Uploader;
 import vanilla.ownwaiter.repository.FoodRepository;
@@ -67,6 +68,7 @@ public class ManagerController {
 
     @GetMapping("/foodList")
     public String moveToFoodList(@AuthenticationPrincipal User user, Model model) {
+        user = userRepository.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("찾을 수 없습니다."));
         model.addAttribute("foods", user.getRestaurant().getFoods());
         return "/manager/foodList";
     }
@@ -74,6 +76,7 @@ public class ManagerController {
     @GetMapping("/register/food")
     public String moveToRegisterFood(Model model) {
         model.addAttribute("foodRegisterForm", new FoodRegisterForm());
+        model.addAttribute("foodCategory", FoodCategory.values());
         return "manager/registerFoodForm";
     }
 
@@ -82,6 +85,7 @@ public class ManagerController {
                                @AuthenticationPrincipal User user) throws IOException {
         String uploadUrl = s3Uploader.upload(foodRegisterForm.getImg(), "food");
 
+        user = userRepository.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("없는 유저입니다."));
         Restaurant restaurant = user.getRestaurant();
 
         Food food = foodRegisterForm.toEntity(foodRegisterForm, uploadUrl);
