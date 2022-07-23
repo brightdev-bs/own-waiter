@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import vanilla.ownwaiter.entity.user.User;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -32,14 +34,14 @@ class UserRepositoryTest {
 
     @Test
     void findByEmail() {
-        User findUser = userRepository.findByEmail("asd@naver.com");
+        User findUser = userRepository.findByEmail("asd@naver.com").orElseThrow(() -> new NoSuchElementException("에러"));
         assertEquals(findUser.getEmail(),"asd@naver.com");
         assertEquals(findUser.getUsername(), "kim");
     }
 
     @Test
     void findByUsername() {
-        User user = userRepository.findByUsername("kim");
+        User user = userRepository.findByUsername("kim").orElseThrow(() -> new NoSuchElementException("에러"));
         assertEquals(user.getUsername(), "kim");
     }
 }
