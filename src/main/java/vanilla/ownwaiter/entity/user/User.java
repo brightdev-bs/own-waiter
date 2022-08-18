@@ -6,8 +6,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import vanilla.ownwaiter.entity.basket.BaseEntity;
-import vanilla.ownwaiter.entity.Basket;
-import vanilla.ownwaiter.entity.Restaurant;
+import vanilla.ownwaiter.entity.basket.Basket;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
