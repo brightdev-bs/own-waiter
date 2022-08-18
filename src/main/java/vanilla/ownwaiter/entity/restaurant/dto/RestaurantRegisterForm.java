@@ -1,16 +1,8 @@
-package vanilla.ownwaiter.entity.dto;
+package vanilla.ownwaiter.entity.restaurant.dto;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import vanilla.ownwaiter.entity.Restaurant;
-import vanilla.ownwaiter.file.S3Uploader;
-
-import javax.persistence.Entity;
-import java.io.IOException;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 
 @Data
 public class RestaurantRegisterForm {

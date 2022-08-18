@@ -1,20 +1,14 @@
 package vanilla.ownwaiter.service;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import vanilla.ownwaiter.entity.Basket;
-import vanilla.ownwaiter.entity.Restaurant;
-import vanilla.ownwaiter.entity.food.Food;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 import vanilla.ownwaiter.entity.user.User;
-import vanilla.ownwaiter.entity.user.UserRole;
 import vanilla.ownwaiter.repository.BasketRepository;
 import vanilla.ownwaiter.repository.UserRepository;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 

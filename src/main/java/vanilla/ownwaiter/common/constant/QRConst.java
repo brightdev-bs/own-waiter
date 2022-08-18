@@ -1,4 +1,4 @@
-package vanilla.ownwaiter.constant;
+package vanilla.ownwaiter.common.constant;
 
 public interface QRConst {
     int WIDTH = 100;

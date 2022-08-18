@@ -1,9 +1,7 @@
 package vanilla.ownwaiter.controller;
 
-import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import vanilla.ownwaiter.entity.Restaurant;
-import vanilla.ownwaiter.entity.dto.FoodRegisterForm;
-import vanilla.ownwaiter.entity.dto.RestaurantRegisterForm;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
+import vanilla.ownwaiter.entity.food.dto.FoodRegisterForm;
+import vanilla.ownwaiter.entity.restaurant.dto.RestaurantRegisterForm;
 import vanilla.ownwaiter.entity.food.Food;
 import vanilla.ownwaiter.entity.food.FoodCategory;
 import vanilla.ownwaiter.entity.user.User;

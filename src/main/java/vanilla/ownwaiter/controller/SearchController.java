@@ -1,15 +1,13 @@
 package vanilla.ownwaiter.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import vanilla.ownwaiter.entity.Restaurant;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.service.RestaurantService;
 import vanilla.ownwaiter.service.UserService;

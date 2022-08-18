@@ -3,6 +3,8 @@ package vanilla.ownwaiter.entity;
 
 import lombok.Getter;
 import vanilla.ownwaiter.entity.basket.BaseEntity;
+import vanilla.ownwaiter.entity.basket.Basket;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 
 import javax.persistence.*;
 
@@ -25,5 +27,4 @@ public class Order extends BaseEntity {
 
     private String userRequest;
 
-    //
 }

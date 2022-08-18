@@ -8,16 +8,14 @@ import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import vanilla.ownwaiter.constant.QRConst;
+import vanilla.ownwaiter.common.constant.QRConst;
 import vanilla.ownwaiter.file.S3Uploader;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.Map;
 import java.util.UUID;
 
 @Service

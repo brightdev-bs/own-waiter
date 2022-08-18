@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import vanilla.ownwaiter.entity.basket.BaseEntity;
 import vanilla.ownwaiter.entity.basket.BasketFood;
-import vanilla.ownwaiter.entity.Restaurant;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 
 import javax.persistence.*;
 import java.util.ArrayList;

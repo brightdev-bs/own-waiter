@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import vanilla.ownwaiter.entity.Restaurant;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 
 import java.util.List;
 import java.util.NoSuchElementException;
