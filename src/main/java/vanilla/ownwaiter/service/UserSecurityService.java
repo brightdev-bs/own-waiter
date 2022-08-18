@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.entity.user.UserRole;
+import vanilla.ownwaiter.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class UserSecurityService implements UserDetailsService {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -30,7 +31,7 @@ public class UserSecurityService implements UserDetailsService {
     }
 
     private User getSiteUser(String email) {
-        User findUser = userService.findByEmail(email).orElseThrow(() -> new NoSuchElementException("존재 하지 않는 유저입니다."));
+        User findUser = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("존재 하지 않는 유저입니다."));
         return findUser;
     }
 

@@ -1,5 +1,7 @@
 package vanilla.ownwaiter.handler;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -16,17 +18,18 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 @Component
+@Slf4j
 public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         String errorMessage;
-        if(exception instanceof BadCredentialsException) {
-            errorMessage = "아이디 또는 비밀번호가 맞지 않습니다.";
-        } else if (exception instanceof InternalAuthenticationServiceException) {
-            errorMessage = "내부적으로 발생한 시스템 문제로 인해 요청을 처리할 수 없습니다.";
-        } else if (exception instanceof UsernameNotFoundException) {
+        if(exception instanceof UsernameNotFoundException) {
             errorMessage = "계정이 존재하지 않습니다.";
+        } else if(exception instanceof BadCredentialsException) {
+            errorMessage = "아이디 또는 비밀번호가 맞지 않습니다.";
+        }  else if (exception instanceof InternalAuthenticationServiceException) {
+            errorMessage = "내부적으로 발생한 시스템 문제로 인해 요청을 처리할 수 없습니다.";
         } else if (exception instanceof AuthenticationCredentialsNotFoundException) {
             errorMessage = "인증 요청이 거부되었습니다. ";
         } else {
