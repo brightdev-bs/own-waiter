@@ -1,7 +1,8 @@
-package vanilla.ownwaiter.entity;
+package vanilla.ownwaiter.entity.restaurant;
 
 import lombok.Builder;
 import lombok.Getter;
+import vanilla.ownwaiter.entity.Order;
 import vanilla.ownwaiter.entity.basket.BaseEntity;
 import vanilla.ownwaiter.entity.food.Food;
 

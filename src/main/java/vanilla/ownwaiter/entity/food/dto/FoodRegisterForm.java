@@ -1,4 +1,4 @@
-package vanilla.ownwaiter.entity.dto;
+package vanilla.ownwaiter.entity.food.dto;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
