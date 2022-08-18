@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import vanilla.ownwaiter.common.utils.ImageUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,6 +32,7 @@ public class S3Uploader {
 
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
         if(multipartFile.isEmpty()) {
+            log.debug("이미지 없습니다.");
             return null;
         }
         File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File 변환 실패"));
@@ -50,6 +52,9 @@ public class S3Uploader {
             try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                 fos.write(file.getBytes());
             }
+
+            ImageUtils.resizeImage(convertFile, 200, 200);
+            log.info("ImageUtils 실행됨");
             return Optional.of(convertFile);
         }
 
