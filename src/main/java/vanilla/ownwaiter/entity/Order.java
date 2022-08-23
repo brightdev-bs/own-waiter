@@ -27,4 +27,12 @@ public class Order extends BaseEntity {
 
     private String userRequest;
 
+    public Order() {
+    }
+
+    public Order(Restaurant restaurant, Basket basket, String userRequest) {
+        this.restaurant = restaurant;
+        this.basket = basket;
+        this.userRequest = userRequest;
+    }
 }

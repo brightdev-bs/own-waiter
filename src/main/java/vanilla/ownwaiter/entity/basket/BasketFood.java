@@ -2,11 +2,9 @@ package vanilla.ownwaiter.entity.basket;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import vanilla.ownwaiter.entity.Basket;
 import vanilla.ownwaiter.entity.food.Food;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Slf4j
 @Entity
@@ -34,7 +32,8 @@ public class BasketFood {
 
     public void setBasket(Basket basket) {
         this.basket = basket;
-        basket.getBasketFoods().add(this);
+        if(basket != null)
+            basket.getBasketFoods().add(this);
     }
 
 }
