@@ -1,7 +1,9 @@
-package vanilla.ownwaiter.entity;
+package vanilla.ownwaiter.entity.basket;
 
 import lombok.Getter;
+import vanilla.ownwaiter.entity.Order;
 import vanilla.ownwaiter.entity.basket.BasketFood;
+import vanilla.ownwaiter.entity.restaurant.Restaurant;
 import vanilla.ownwaiter.entity.user.User;
 
 import javax.persistence.*;
@@ -33,7 +35,7 @@ public class Basket implements Serializable {
         this.user = user;
     }
 
-    public void setBasketFoods(BasketFood basketFood) {
-        this.basketFoods = basketFoods;
+    public Restaurant getRestaurant() {
+        return this.basketFoods.get(0).getFood().getRestaurant();
     }
 }
