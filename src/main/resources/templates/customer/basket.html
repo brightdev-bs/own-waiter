@@ -29,14 +29,39 @@
                 </div>
             </div>
         </section>
-        <form th:action="@{/order/submit}" method="post">
+        <form>
             <div class="mb-3">
                 <label for="request" class="form-label">요청 사항</label>
                 <textarea class="form-control" name="request" id="request" rows="3"></textarea>
             </div>
-            <button type="button" th:type="submit" class="btn btn-primary btn-sm col-3 mb-5 mt-2 me-2 float-end">
+            <button type="button" onclick="search()" class="btn btn-primary btn-sm col-3 mb-5 mt-2 me-2 float-end">
                 주문
             </button>
         </form>
+
+        <script th:inline="javascript">
+            function search() {
+                let header = $("meta[name='_csrf_header']").attr("content");
+                let token = $("meta[name='_csrf']").attr("content");
+
+                $.ajax({
+                    type: "POST",
+                    url: '/order/submit',
+                    data: {
+                        request: $('#request').val()
+                    },
+                    beforeSend: function(jqXHR) {
+                        jqXHR.setRequestHeader(header, token);
+                    },
+                    success: function() {
+                        alert("성공");
+                        location.href = "http://localhost:8080/home";
+                    },
+                    error: function onError(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        </script>
     </body>
 </html>
