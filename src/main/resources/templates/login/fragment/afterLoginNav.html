@@ -1,8 +1,9 @@
-<div th:fragment="afterLoginNav" class="collapse navbar-collapse" id="navbarSupportedContent">
+<div th:fragment="afterLoginNav" class="collapse navbar-collapse" id="navbarSupportedContent"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <div class="navbar">
             <div class="fst-italic me-2" style="list-style: none" th:text="${#authentication.name}">관리자</div>
-            <a class="btn btn-link" th:href="@{/basket}">장바구니</a>
+            <a class="btn btn-link" sec:authorize="hasAnyAuthority('USER', 'ROLE_ANONYMOUS')" th:href="@{/basket}">장바구니</a>
             <a class="btn btn-link" th:href="@{/logout}">logout</a>
         </div>
     </ul>

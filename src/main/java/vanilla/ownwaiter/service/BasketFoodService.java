@@ -14,6 +14,7 @@ import vanilla.ownwaiter.repository.BasketFoodRepository;
 import vanilla.ownwaiter.repository.BasketRepository;
 import vanilla.ownwaiter.repository.FoodRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -39,6 +40,11 @@ public class BasketFoodService {
 
     public Basket getBasket(@AuthenticationPrincipal User user) {
         return basketRepository.findByUserId(user.getId()).orElseThrow(() -> new NoSuchElementException("없는 장바구니입니다."));
+    }
+
+    public List<BasketFood> getBasketFood(@AuthenticationPrincipal User user) {
+        List<BasketFood> basketFoods = basketFoodRepository.findUnsubmittedFoods(getBasket(user), "N");
+        return basketFoods;
     }
 
     private BasketFood createBasketFood() {

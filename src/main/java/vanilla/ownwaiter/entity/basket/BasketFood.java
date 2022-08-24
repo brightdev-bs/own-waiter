@@ -25,6 +25,17 @@ public class BasketFood {
     @JoinColumn(name = "basket_id")
     private Basket basket;
 
+    private String submitFlag = "N";
+    private String serveFlag = "N";
+
+    public void setSubmitFlag(String submitFlag) {
+        this.submitFlag = submitFlag;
+    }
+
+    public void setServeFlag(String serveFlag) {
+        this.serveFlag = serveFlag;
+    }
+
     public void setFood(Food food) {
         this.food = food;
         food.getBasketFoods().add(this);

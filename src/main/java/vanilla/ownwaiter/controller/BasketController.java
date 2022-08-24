@@ -28,8 +28,7 @@ public class BasketController {
 
     @GetMapping
     public String moveToBasket(@AuthenticationPrincipal User user, Model model) {
-        Basket basket = basketFoodService.getBasket(user);
-        List<BasketFood> basketFoods = basket.getBasketFoods();
+        List<BasketFood> basketFoods = basketFoodService.getBasketFood(user);
         model.addAttribute("basketFoods", basketFoods);
         return "/customer/basket";
     }
