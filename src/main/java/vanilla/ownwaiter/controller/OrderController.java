@@ -23,7 +23,6 @@ public class OrderController {
 
     @PostMapping("/submit")
     public String completeOrder(@AuthenticationPrincipal User user, @RequestParam String request) {
-        log.info("request = {}", request);
         Basket basket = basketFoodService.getBasket(user);
         Restaurant restaurant = basket.getRestaurant();
         Order order = new Order(restaurant, basket, request);
