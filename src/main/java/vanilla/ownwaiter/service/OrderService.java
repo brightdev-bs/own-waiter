@@ -25,8 +25,8 @@ public class OrderService {
     public void save(Order order, List<BasketFood> foods) {
         orderRepository.save(order);
         for (BasketFood food : foods) {
-            food.setBasket(null);
+            food.setSubmitFlag("Y");
         }
-        basketFoodRepository.deleteAll(foods);
+        basketFoodRepository.saveAll(foods);
     }
 }
