@@ -43,12 +43,8 @@ public class BasketFood {
 
     public void setBasket(Basket basket) {
         this.basket = basket;
-<<<<<<< HEAD
-        basket.getBasketFoods().add(this);
-=======
         if(basket != null)
             basket.getBasketFoods().add(this);
->>>>>>> basketfood
     }
 
 }
