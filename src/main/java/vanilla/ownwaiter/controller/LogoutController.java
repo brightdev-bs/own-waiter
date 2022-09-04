@@ -14,6 +14,6 @@ public class LogoutController {
         HttpSession session = request.getSession();
         if(session != null) session.invalidate();
 
-        return "redirect:/home";
+        return "redirect:home";
     }
 }

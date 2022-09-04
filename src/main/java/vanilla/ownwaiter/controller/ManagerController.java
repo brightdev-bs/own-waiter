@@ -63,7 +63,7 @@ public class ManagerController {
         user.registerRestaurant(restaurant);
         userRepository.save(user);
 
-        return "redirect:/manager";
+        return "redirect:manager";
     }
 
     @GetMapping("/foodList")
@@ -92,7 +92,7 @@ public class ManagerController {
         food.setRestaurant(restaurant);
         foodRepository.save(food);
 
-        return "redirect:/manager/foodList";
+        return "redirect:manager/foodList";
     }
 
     @GetMapping("/orderList")
@@ -109,7 +109,7 @@ public class ManagerController {
         Order order = orderRepository.findById(id).orElseThrow(() -> new IllegalStateException("존재하지 않습니다."));
         order.setCompleteFlag();
         orderRepository.save(order);
-        return "redirect:/manager/orderList";
+        return "redirect:manager/orderList";
     }
 
     @GetMapping("qr")

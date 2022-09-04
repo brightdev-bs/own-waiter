@@ -36,7 +36,7 @@ public class BasketController {
     @PostMapping("/add")
     public String addFoodToBasket(@AuthenticationPrincipal User user, @RequestParam String id) {
         basketFoodService.save(user, id);
-        return "redirect:/basket";
+        return "redirect:basket";
     }
 
 

@@ -45,7 +45,7 @@ public class JoinController {
 
         userService.save(joinForm);
 
-        return "redirect:/login";
+        return "redirect:login";
     }
 
     private void addModelForEnum(Model model) {
