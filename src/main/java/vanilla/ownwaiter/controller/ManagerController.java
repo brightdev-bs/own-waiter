@@ -49,7 +49,7 @@ public class ManagerController {
     @GetMapping("/register/restaurant")
     public String registerRestaurant(Model model) {
         addRestaurantFormToModel(model);
-        return "/manager/registerRestaurantForm";
+        return "manager/registerRestaurantForm";
     }
 
     @PostMapping("/register/restaurant")
@@ -70,7 +70,7 @@ public class ManagerController {
     public String moveToFoodList(@AuthenticationPrincipal User user, Model model) {
         user = userRepository.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("찾을 수 없습니다."));
         model.addAttribute("foods", user.getRestaurant().getFoods());
-        return "/manager/foodList";
+        return "manager/foodList";
     }
 
     @GetMapping("/register/food")
@@ -101,7 +101,7 @@ public class ManagerController {
         List<Order> orders = orderRepository.findUncompletedOrder(restaurant, "N");
         log.info("orders = {}", orders);
         model.addAttribute("orders", orders);
-        return "/manager/orderList";
+        return "manager/orderList";
     }
 
     @PostMapping("/orderList/complete")
@@ -116,7 +116,7 @@ public class ManagerController {
     public String moveToRestaurantQr(@AuthenticationPrincipal User manager, Model model) {
         Restaurant restaurant = manager.getRestaurant();
         model.addAttribute("qr", restaurant.getQrCodeUrl());
-        return "/manager/restaurantQr";
+        return "manager/restaurantQr";
     }
 
 

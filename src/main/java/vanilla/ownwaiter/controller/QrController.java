@@ -22,7 +22,7 @@ public class QrController {
 
     @GetMapping("/scan")
     public String moveToScan() {
-        return "/customer/qr/scanQr";
+        return "customer/qr/scanQr";
     }
 
 

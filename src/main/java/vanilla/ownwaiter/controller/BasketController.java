@@ -30,7 +30,7 @@ public class BasketController {
     public String moveToBasket(@AuthenticationPrincipal User user, Model model) {
         List<BasketFood> basketFoods = basketFoodService.getBasketFood(user);
         model.addAttribute("basketFoods", basketFoods);
-        return "/customer/basket";
+        return "customer/basket";
     }
 
     @PostMapping("/add")
