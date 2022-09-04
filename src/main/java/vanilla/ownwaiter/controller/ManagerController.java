@@ -5,10 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import vanilla.ownwaiter.entity.Order;
 import vanilla.ownwaiter.entity.restaurant.Restaurant;
 import vanilla.ownwaiter.entity.food.dto.FoodRegisterForm;
 import vanilla.ownwaiter.entity.restaurant.dto.RestaurantRegisterForm;
@@ -17,11 +15,14 @@ import vanilla.ownwaiter.entity.food.FoodCategory;
 import vanilla.ownwaiter.entity.user.User;
 import vanilla.ownwaiter.file.S3Uploader;
 import vanilla.ownwaiter.repository.FoodRepository;
+import vanilla.ownwaiter.repository.OrderRepository;
 import vanilla.ownwaiter.repository.UserRepository;
 import vanilla.ownwaiter.service.RestaurantService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -32,6 +33,7 @@ public class ManagerController {
     private final RestaurantService restaurantService;
     private final FoodRepository foodRepository;
     private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
     private final S3Uploader s3Uploader;
 
     @GetMapping
@@ -93,11 +95,21 @@ public class ManagerController {
         return "redirect:/manager/foodList";
     }
 
-    @GetMapping("orderList")
+    @GetMapping("/orderList")
     public String moveToOrderList(@AuthenticationPrincipal User manager, Model model) {
         Restaurant restaurant = manager.getRestaurant();
-        model.addAttribute("orders", restaurant.getOrders());
+        List<Order> orders = orderRepository.findUncompletedOrder(restaurant, "N");
+        log.info("orders = {}", orders);
+        model.addAttribute("orders", orders);
         return "/manager/orderList";
+    }
+
+    @PostMapping("/orderList/complete")
+    public String completeOrder(@RequestParam Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new IllegalStateException("존재하지 않습니다."));
+        order.setCompleteFlag();
+        orderRepository.save(order);
+        return "redirect:/manager/orderList";
     }
 
     @GetMapping("qr")
