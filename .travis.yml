@@ -18,3 +18,20 @@ notifications:
     recipients:
       - brightdev.bs@gmail.com
 
+before_deploy:
+  - zip -r ownwaiter
+  - mkdir -p deploy
+  - mv ownwaiter.zip deploy/ownwaiter.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY #Travis repo settings에 설정된 값
+    bucket: build-ec2
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl : private
+    local_dir: deploy
+    wait-until-deployed: true
+
+
