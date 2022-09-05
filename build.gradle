@@ -38,11 +38,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	runtimeOnly 'mysql:mysql-connector-java'
 
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	// lombok
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
+	// QR
 	implementation 'com.google.zxing:core:3.4.1'
 	implementation 'com.google.zxing:javase:3.4.1'
+
+	// meta annotation
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
