@@ -36,10 +36,11 @@ deploy:
     bucket: deploy-waiter
     key: own-waiter.zip
     bundle_type: zip
-    application: own-waiter
-    deployment_group: own-waiter-group
+    application: own-waiter-deploy
+    deployment_group: own-waiter-deploy-group
     region: ap-northeast-2
     wait-until-deployed: true
+    on: main
 
 notifications:
   email:
