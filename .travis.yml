@@ -19,7 +19,7 @@ notifications:
       - brightdev.bs@gmail.com
 
 before_deploy:
-  - zip -r ownwaiter
+  - zip -r ownwaiter *
   - mkdir -p deploy
   - mv ownwaiter.zip deploy/ownwaiter.zip
 
