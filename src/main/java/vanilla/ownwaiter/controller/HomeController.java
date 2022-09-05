@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String moveToHome() {
-        return "redirect:home";
+        return "redirect:/home";
     }
 
     @GetMapping("/home")

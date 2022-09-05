@@ -27,7 +27,7 @@ public class OrderController {
         Restaurant restaurant = basket.getRestaurant();
         Order order = new Order(restaurant, basket, request);
         orderService.save(order, basket.getBasketFoods());
-        return "redirect:home";
+        return "redirect:/home";
     }
 
 }
